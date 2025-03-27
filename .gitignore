@@ -173,3 +173,4 @@ cython_debug/
 
 # Replit
 .replit
+generated-icon.png
