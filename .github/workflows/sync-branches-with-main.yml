@@ -1,8 +1,11 @@
-name: Sync Branches with Main
+name: Sync Branches with Dev
 
 on:
   push:
-    branches: [main]
+    branches:
+      - qa
+      - frontend
+      - backend
 
 permissions:
   contents: write
@@ -11,7 +14,7 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Main Branch
+      - name: Checkout Repository
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
@@ -21,28 +24,50 @@ jobs:
           git config user.name "GitHub Action"
           git config user.email "action@github.com"
 
-      - name: Sync with Frontend Branch
-        run: |
-          git checkout frontend
-          git pull origin frontend || echo "No changes to pull for frontend"
-          git reset --hard origin/main
-          git merge --squash origin/main || echo "No changes to merge for frontend"
-          if [ -n "$(git status --porcelain)" ]; then
-            git commit -m "Squash merge changes from main into frontend"
-            git push origin frontend || echo "Failed to push frontend branch"
-          fi
-          git reset --hard main
-          git push origin frontend --force || echo "Failed to force push frontend branch"
+      - name: Determine Source Branch
+        id: vars
+        run: echo "BRANCH=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
 
-      - name: Sync with Backend Branch
+      - name: Push Source Branch to Dev
         run: |
-          git checkout backend
-          git pull origin backend || echo "No changes to pull for backend"
-          git reset --hard origin/main
-          git merge --squash origin/main || echo "No changes to merge for backend"
+          git checkout dev
+          git pull origin dev || echo "No changes to pull for dev"
+          git reset --hard origin/$BRANCH
+          git merge --squash origin/$BRANCH || echo "No changes to merge from $BRANCH"
           if [ -n "$(git status --porcelain)" ]; then
-            git commit -m "Squash merge changes from main into backend"
-            git push origin backend || echo "Failed to push backend branch"
+            git commit -m "Squash merge changes from $BRANCH into dev"
+            git push origin dev || echo "Failed to push dev branch"
           fi
-          git reset --hard main
-          git push origin backend --force || echo "Failed to force push backend branch"
+          git reset --hard $BRANCH
+          git push origin dev --force || echo "Failed to force push dev branch"
+
+      - name: Sync to Other Branches
+        run: |
+          case "$BRANCH" in
+            "qa")
+              TARGETS=("frontend" "backend")
+              ;;
+            "frontend")
+              TARGETS=("qa" "backend")
+              ;;
+            "backend")
+              TARGETS=("qa" "frontend")
+              ;;
+            *)
+              echo "Branch not configured for syncing."
+              exit 1
+              ;;
+          esac
+
+          for TARGET in "${TARGETS[@]}"; do
+            git checkout $TARGET
+            git pull origin $TARGET || echo "No changes to pull for $TARGET"
+            git reset --hard origin/dev
+            git merge --squash origin/dev || echo "No changes to merge for $TARGET"
+            if [ -n "$(git status --porcelain)" ]; then
+              git commit -m "Squash merge changes from dev into $TARGET"
+              git push origin $TARGET || echo "Failed to push $TARGET branch"
+            fi
+            git reset --hard dev
+            git push origin $TARGET --force || echo "Failed to force push $TARGET branch"
+          done
