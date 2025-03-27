@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - dev
+      - main
 
 permissions:
   contents: write
@@ -22,19 +23,26 @@ jobs:
           git config user.name "GitHub Action"
           git config user.email "action@github.com"
 
-      - name: Sync Dev to Other Branches
+      - name: Sync Source Branch to Other Branches
         run: |
+          SOURCE_BRANCH="${GITHUB_REF##*/}"
           TARGETS=("qa" "frontend" "backend")
 
           for TARGET in "${TARGETS[@]}"; do
+            # Skip syncing if the source is the same as target
+            if [ "$SOURCE_BRANCH" == "$TARGET" ]; then
+              echo "Skipping $TARGET (same as source)"
+              continue
+            fi
+
             git checkout $TARGET
             git pull origin $TARGET || echo "No changes to pull for $TARGET"
-            git reset --hard origin/dev
-            git merge --squash origin/dev || echo "No changes to merge for $TARGET"
+            git reset --hard origin/$SOURCE_BRANCH
+            git merge --squash origin/$SOURCE_BRANCH || echo "No changes to merge for $TARGET"
             if [ -n "$(git status --porcelain)" ]; then
-              git commit -m "Squash merge changes from dev into $TARGET"
+              git commit -m "Squash merge changes from $SOURCE_BRANCH into $TARGET"
               git push origin $TARGET || echo "Failed to push $TARGET branch"
             fi
-            git reset --hard dev
+            git reset --hard $SOURCE_BRANCH
             git push origin $TARGET --force || echo "Failed to force push $TARGET branch"
           done
