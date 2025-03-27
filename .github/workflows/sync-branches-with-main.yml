@@ -1,8 +1,9 @@
-name: Sync Branches with Main
+name: Sync Dev to Other Branches
 
 on:
   push:
-    branches: [main]
+    branches:
+      - dev
 
 permissions:
   contents: write
@@ -11,7 +12,7 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Main Branch
+      - name: Checkout Repository
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
@@ -21,28 +22,19 @@ jobs:
           git config user.name "GitHub Action"
           git config user.email "action@github.com"
 
-      - name: Sync with Frontend Branch
+      - name: Sync Dev to Other Branches
         run: |
-          git checkout frontend
-          git pull origin frontend || echo "No changes to pull for frontend"
-          git reset --hard origin/main
-          git merge --squash origin/main || echo "No changes to merge for frontend"
-          if [ -n "$(git status --porcelain)" ]; then
-            git commit -m "Squash merge changes from main into frontend"
-            git push origin frontend || echo "Failed to push frontend branch"
-          fi
-          git reset --hard main
-          git push origin frontend --force || echo "Failed to force push frontend branch"
+          TARGETS=("qa" "frontend" "backend")
 
-      - name: Sync with Backend Branch
-        run: |
-          git checkout backend
-          git pull origin backend || echo "No changes to pull for backend"
-          git reset --hard origin/main
-          git merge --squash origin/main || echo "No changes to merge for backend"
-          if [ -n "$(git status --porcelain)" ]; then
-            git commit -m "Squash merge changes from main into backend"
-            git push origin backend || echo "Failed to push backend branch"
-          fi
-          git reset --hard main
-          git push origin backend --force || echo "Failed to force push backend branch"
+          for TARGET in "${TARGETS[@]}"; do
+            git checkout $TARGET
+            git pull origin $TARGET || echo "No changes to pull for $TARGET"
+            git reset --hard origin/dev
+            git merge --squash origin/dev || echo "No changes to merge for $TARGET"
+            if [ -n "$(git status --porcelain)" ]; then
+              git commit -m "Squash merge changes from dev into $TARGET"
+              git push origin $TARGET || echo "Failed to push $TARGET branch"
+            fi
+            git reset --hard dev
+            git push origin $TARGET --force || echo "Failed to force push $TARGET branch"
+          done
