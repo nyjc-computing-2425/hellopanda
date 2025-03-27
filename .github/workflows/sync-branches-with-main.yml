@@ -1,11 +1,9 @@
-name: Sync Branches with Dev
+name: Sync Dev to Other Branches
 
 on:
   push:
     branches:
-      - qa
-      - frontend
-      - backend
+      - dev
 
 permissions:
   contents: write
@@ -24,40 +22,9 @@ jobs:
           git config user.name "GitHub Action"
           git config user.email "action@github.com"
 
-      - name: Determine Source Branch
-        id: vars
-        run: echo "BRANCH=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
-
-      - name: Push Source Branch to Dev
+      - name: Sync Dev to Other Branches
         run: |
-          git checkout dev
-          git pull origin dev || echo "No changes to pull for dev"
-          git reset --hard origin/$BRANCH
-          git merge --squash origin/$BRANCH || echo "No changes to merge from $BRANCH"
-          if [ -n "$(git status --porcelain)" ]; then
-            git commit -m "Squash merge changes from $BRANCH into dev"
-            git push origin dev || echo "Failed to push dev branch"
-          fi
-          git reset --hard $BRANCH
-          git push origin dev --force || echo "Failed to force push dev branch"
-
-      - name: Sync to Other Branches
-        run: |
-          case "$BRANCH" in
-            "qa")
-              TARGETS=("frontend" "backend")
-              ;;
-            "frontend")
-              TARGETS=("qa" "backend")
-              ;;
-            "backend")
-              TARGETS=("qa" "frontend")
-              ;;
-            *)
-              echo "Branch not configured for syncing."
-              exit 1
-              ;;
-          esac
+          TARGETS=("qa" "frontend" "backend")
 
           for TARGET in "${TARGETS[@]}"; do
             git checkout $TARGET
