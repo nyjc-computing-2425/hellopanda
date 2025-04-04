@@ -1,6 +1,8 @@
 from flask import Flask, abort, redirect, render_template
 
 app = Flask(__name__)
+testfiles = [{"id": "nbd", "topic": "no bags everyone"}, 
+             {"id": "brawlday", "topic": "brawl stars competition"}]
 
 
 @app.route('/') # Sprint 2 / MVP
@@ -15,7 +17,7 @@ def student_page():
 
 @app.route('/student/event_details')
 def student_event_details_page():
-    return render_template("studenteventdetails.html")
+    return render_template("pages/studenteventdetails.html", events=testfiles)
     
 
 @app.route('/login') # Sprint 2 / MVP
