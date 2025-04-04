@@ -6,7 +6,7 @@ from hashlib import pbkdf2_hmac
 HASH_ITERATIONS = 10_000 
 LETTERS = list(ascii_letters)
 
-def generate_salt(length: int = 16) -> bytes:
+def generate_salt(length: int = 16) -> str:
     """
     Generates a salt for hashing passwords
     Returns a string of `length` random characters
