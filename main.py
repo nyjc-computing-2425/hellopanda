@@ -1,41 +1,27 @@
-from flask import Flask, abort, redirect, render_template, request
-from validate import *
+from flask import Flask, abort, redirect, render_template
 
 app = Flask(__name__)
-testfiles = [{"id": "nbd", "topic": "no bags everyone"}, 
-             {"id": "brawlday", "topic": "brawl stars competition"}]
 
 
-@app.route('/')
-def index():
-    return render_template("/pages/index.html")
+@app.route('/') # Sprint 2 / MVP
+def index(): 
+    return render_template("pages/index.html")
+    
 
-
-@app.route('/home')
-def home_page():
-    return "home page"
-
-
-@app.route('/student')
+@app.route('/student') # Sprint 2 / MVP
 def student_page():
-    return "student page"
-
+    return render_template('student.html')
+    
 
 @app.route('/student/event_details')
 def student_event_details_page():
-    return render_template("pages/studenteventdetails.html", events=testfiles)
+    return render_template("studenteventdetails.html")
     
 
-
-@app.route('/login', methods=["GET", "POST"])
+@app.route('/login') # Sprint 2 / MVP
 def login_page():
-    if request.method == "GET":
-        return render_template("pages/login.html")
-    elif request.method == "POST":
-        if not email(request.form["email"]) or not password(request.form["password"]):
-            return render_template("pages/login.html", errormsg = "login unsuccessful")
-        return render_template("pages/login.html")
-    return redirect("/home")
+    return render_template('login.html')
+
 
 @app.route('/organiser')
 def organiser_page():
