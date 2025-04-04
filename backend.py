@@ -10,14 +10,14 @@ def create_account_table() -> None:
 
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS "account" (
-                "email" TEXT NOT NULL,
-                "salt" TEXT NOT NULL,
-                "password" INTEGER NOT NULL,
-                "type" TEXT NOT NULL,
-                "name" TEXT NOT NULL,
-                "class" INTEGER,
-                "graduation_year" INTEGER,
-                PRIMARY KEY("email")
+            "email" TEXT NOT NULL,
+            "salt" TEXT NOT NULL,
+            "password" INTEGER NOT NULL,
+            "type" TEXT NOT NULL,
+            "name" TEXT NOT NULL,
+            "class" INTEGER,
+            "graduation_year" INTEGER,
+            PRIMARY KEY("email")
         );
     """)
 
@@ -120,11 +120,15 @@ def retrieve_byemail(email):
     cursor.execute("""
             SELECT * FROM account
             WHERE email = ?;
-        """,[email])
+        """, 
+        [email]
+    )
     result = cursor.fetchall()
 
     conn.commit()
     conn.close()
+
+    return result
 
 def retrieve_byyear(year):
     conn = sqlite3.connect('capstone.db')
@@ -133,11 +137,15 @@ def retrieve_byyear(year):
     cursor.execute("""
             SELECT * FROM account
             WHERE year = ?;
-        """,[year])
+        """,
+        [year]
+    )
     result = cursor.fetchall()
 
     conn.commit()
     conn.close()
+
+    return result
 
 #Functions to update account data
 def update_name(email, new_name):
@@ -197,6 +205,6 @@ if __name__ == "__main__":
     create_account_table()
     store_account_data('3', '1', '123', '1', 'John Doe', 101, 2024)
     print(retrieve_byname('John Doe'))
-    # update_name('3','hehe')
+    update_name('3','hehe')
     # update_email('3','4')
     print(retrieve_byname('hehe'))
