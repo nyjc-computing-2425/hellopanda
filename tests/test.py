@@ -49,13 +49,13 @@ class TestValidateName(unittest.TestCase):
 
 class TestValidateClass(unittest.TestCase):
     def test_letters(self):
-        self.assertTrue(validate.class('2426'))
-        self.assertFalse(validate.class('2a26'))
+        self.assertTrue(validate.class_number('2426'))
+        self.assertFalse(validate.class_number('2a26'))
     
     def test_length(self):
-        self.assertTrue(validate.class('2426'))
-        self.assertFalse(validate.class('23456'))
+        self.assertTrue(validate.class_number('2426'))
+        self.assertFalse(validate.class_number('23456'))
 
     def test_special_characters(self):
-        self.assertTrue(validate.class('1234'))
-        self.assertFalse(validate.class('24@26'))
+        self.assertTrue(validate.class_number('1234'))
+        self.assertFalse(validate.class_number('24@26'))
