@@ -3,29 +3,24 @@ from flask import Flask, abort, redirect
 app = Flask(__name__)
 
 
-@app.route('/')
-def index():
-    return redirect("/home")
+@app.route('/') # Sprint 2 / MVP
+def index(): 
+    return render_template('home.html')
+    
 
-
-@app.route('/home')
-def home_page():
-    return "home page"
-
-
-@app.route('/student')
+@app.route('/student') # Sprint 2 / MVP
 def student_page():
-    return "student page"
-
+    return render_template('student.html')
+    
 
 @app.route('/student/event_details')
 def student_event_details_page():
     return "student event details page"
+    
 
-
-@app.route('/login')
+@app.route('/login') # Sprint 2 / MVP
 def login_page():
-    return "login page"
+    return render_template('login.html')
 
 
 @app.route('/organiser')
