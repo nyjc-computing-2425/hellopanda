@@ -1,10 +1,42 @@
 import unittest
 import validate
 
-class validate_email_tc(unittest.TestCase):
+class TestValidateEmail(unittest.TestCase):
     def test_at_symbol(self):
-        self.assertTrue(validate_email('kenneth@gmail.com'))
-        self.assertFalse(validate_email('kennethgmail.com'))
+        self.assertTrue(validate.email('hellopanda@gmail.com'))
+        self.assertFalse(validate.email('hellopandagmail.com'))
+        self.assertFalse(validate.email("hellopanda#gamil.com"))
+
+    def test_no_space(self):
+        self.assertTrue(validate.email("hellopanda@gmail.com"))
+        self.assertFalse(validate.email("hello panda@gmail.com"))
+
+    def test_in_domain(self):
+        self.assertTrue(validate.email("hellopanda@gmail.com"))
+        self.assertFalse(validate.email("hellopanda@gmailcom"))
+
+class TestValidatePassword(unittest.TestCase):
+    def test_no_space(self):
+        self.assertTrue(validate.password("@R3alPassword"))
+        self.assertFalse(validate.password("a real password"))
+
+    def test_length(self):
+        self.assertTrue(validate.password("@R3alPassword"))
+        self.assertTrue(validate.password("R3alPassw@rd"))
+        self.assertFalse(validate.password("@R3alPass"))
+
+    def test_uppercase(self):
+        self.assertTrue(validate.password("@R3alPassword"))
+        self.assertFalse(validate.password("arealpassword"))
+
+    
+    def test_number(self):
+        self.assertTrue(validate.password("@R3alPassword"))
+        self.assertFalse(validate.password("aRealPassword"))
+
+    def test_special_char(self):
+        self.assertTrue(validate.password("@R3alPassword"))
+        self.assertFalse(validate.password('aR3alPassword'))
 
 class TestValidateName(unittest.TestCase):
     def test_presence_of_symbols(self):
@@ -27,6 +59,3 @@ class TestValidateClass(unittest.TestCase):
     def test_special_characters(self):
         self.assertTrue(validate.class('1234'))
         self.assertFalse(validate.class('24@26'))
-
-if __name__ == '__main__':
-    unittest.main()
