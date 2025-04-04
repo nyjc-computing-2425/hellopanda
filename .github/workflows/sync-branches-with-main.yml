@@ -1,4 +1,4 @@
-name: Sync Main to Other Branches (Overwrite Files)
+name: Sync Main to Other Branches (Overwrite Files Safely)
 
 on:
   push:
@@ -37,14 +37,15 @@ jobs:
 
             echo "Force syncing $SOURCE_BRANCH into $TARGET"
 
-            # Checkout the target branch
+            # Safely fetch and checkout the target branch even if a file/folder exists with same name
+            git fetch origin $TARGET:$TARGET || true
             git checkout $TARGET
             git pull origin $TARGET
 
-            # Checkout all files from source branch into working directory
+            # Overwrite working directory with files from source branch
             git checkout origin/$SOURCE_BRANCH -- .
 
-            # Stage and commit the changes
+            # Stage and commit if there are changes
             if [ -n "$(git status --porcelain)" ]; then
               git add .
               git commit -m "Force sync files from $SOURCE_BRANCH into $TARGET"
