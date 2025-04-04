@@ -38,6 +38,3 @@ class TestValidatePassword(unittest.TestCase):
         self.assertTrue(validate.password("@R3alPassword"))
         self.assertFalse(validate.password('aR3alPassword'))
 
-
-if __name__ == '__main__':
-    unittest.main()
