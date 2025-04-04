@@ -8,7 +8,7 @@ testfiles = [{"id": "nbd", "topic": "no bags everyone"},
 
 @app.route('/')
 def index():
-    return render_template("/pages/index.html")
+    return render_template("/pages/index/index.html")
 
 
 @app.route('/home')
@@ -23,18 +23,18 @@ def student_page():
 
 @app.route('/student/event_details')
 def student_event_details_page():
-    return render_template("pages/studenteventdetails.html", events=testfiles)
+    return render_template("pages/studenteventdetails/studenteventdetails.html", events=testfiles)
     
 
 
 @app.route('/login', methods=["GET", "POST"])
 def login_page():
     if request.method == "GET":
-        return render_template("pages/login.html")
+        return render_template("pages/login/login.html")
     elif request.method == "POST":
         if not email(request.form["email"]) or not password(request.form["password"]):
-            return render_template("pages/login.html", errormsg = "login unsuccessful")
-        return render_template("pages/login.html")
+            return render_template("pages/login/login.html", errormsg = "login unsuccessful")
+        return render_template("pages/login/login.html")
     return redirect("/home")
 
 @app.route('/organiser')
