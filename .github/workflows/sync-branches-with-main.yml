@@ -1,4 +1,4 @@
-name: Sync Main to Other Branches
+name: Sync Main to Other Branches (Overwrite Files)
 
 on:
   push:
@@ -22,10 +22,12 @@ jobs:
           git config user.name "GitHub Action"
           git config user.email "action@github.com"
 
-      - name: Sync Main into Other Branches
+      - name: Forcefully Sync Main into Other Branches
         run: |
           SOURCE_BRANCH="main"
           TARGETS=("qa" "frontend" "backend" "dev")
+
+          git fetch origin
 
           for TARGET in "${TARGETS[@]}"; do
             if [ "$SOURCE_BRANCH" == "$TARGET" ]; then
@@ -33,22 +35,19 @@ jobs:
               continue
             fi
 
-            echo "Syncing changes from $SOURCE_BRANCH into $TARGET"
+            echo "Force syncing $SOURCE_BRANCH into $TARGET"
 
-            git fetch origin
-
-            # Checkout target branch
+            # Checkout the target branch
             git checkout $TARGET
             git pull origin $TARGET
 
-            # Merge main into target branch
-            git merge origin/$SOURCE_BRANCH -m "Merge $SOURCE_BRANCH into $TARGET" || {
-              echo "Merge conflict occurred in $TARGET. Please resolve manually."
-              exit 1
-            }
+            # Checkout all files from source branch into working directory
+            git checkout origin/$SOURCE_BRANCH -- .
 
-            # Push only if there are changes
+            # Stage and commit the changes
             if [ -n "$(git status --porcelain)" ]; then
+              git add .
+              git commit -m "Force sync files from $SOURCE_BRANCH into $TARGET"
               git push origin $TARGET
             else
               echo "No changes to push for $TARGET"
