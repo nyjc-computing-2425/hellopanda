@@ -1,33 +1,23 @@
-from flask import Flask, abort, redirect, render_template, request
-from validate import *
+from flask import Flask, abort, redirect, render_template
 
 app = Flask(__name__)
-testfiles = [{"id": "nbd", "topic": "no bags everyone"}, 
-             {"id": "brawlday", "topic": "brawl stars competition"}]
 
 
 @app.route('/')
 def index():
     return render_template("/pages/index/index.html")
 
-
-@app.route('/home')
-def home_page():
-    return "home page"
-
-
-@app.route('/student')
+@app.route('/student') # Sprint 2 / MVP
 def student_page():
-    return "student page"
-
+    return render_template('student.html')
+    
 
 @app.route('/student/event_details')
 def student_event_details_page():
     return render_template("pages/studenteventdetails/studenteventdetails.html", events=testfiles)
     
 
-
-@app.route('/login', methods=["GET", "POST"])
+@app.route('/login') # Sprint 2 / MVP
 def login_page():
     if request.method == "GET":
         return render_template("pages/login/login.html")
