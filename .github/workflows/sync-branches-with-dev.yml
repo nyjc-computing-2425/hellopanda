@@ -1,4 +1,4 @@
-name: Sync Dev to Other Branches
+name: Sync Dev to Other Branches (Overwrite Files)
 
 on:
   push:
@@ -22,26 +22,34 @@ jobs:
           git config user.name "GitHub Action"
           git config user.email "action@github.com"
 
-      - name: Sync Source Branch to Other Branches
+      - name: Forcefully Sync Dev into Other Branches
         run: |
-          SOURCE_BRANCH="${GITHUB_REF##*/}"
+          SOURCE_BRANCH="dev"
           TARGETS=("qa" "frontend" "backend")
 
+          git fetch origin
+
           for TARGET in "${TARGETS[@]}"; do
-            # Skip syncing if the source is the same as target
             if [ "$SOURCE_BRANCH" == "$TARGET" ]; then
               echo "Skipping $TARGET (same as source)"
               continue
             fi
 
+            echo "Force syncing $SOURCE_BRANCH into $TARGET"
+
+            # Checkout the target branch
             git checkout $TARGET
-            git pull origin $TARGET || echo "No changes to pull for $TARGET"
-            git reset --hard origin/$SOURCE_BRANCH
-            git merge --squash origin/$SOURCE_BRANCH || echo "No changes to merge for $TARGET"
+            git pull origin $TARGET
+
+            # Overwrite working directory with files from dev
+            git checkout origin/$SOURCE_BRANCH -- .
+
+            # Stage and commit if there are changes
             if [ -n "$(git status --porcelain)" ]; then
-              git commit -m "Squash merge changes from $SOURCE_BRANCH into $TARGET"
-              git push origin $TARGET || echo "Failed to push $TARGET branch"
+              git add .
+              git commit -m "Force sync files from $SOURCE_BRANCH into $TARGET"
+              git push origin $TARGET
+            else
+              echo "No changes to push for $TARGET"
             fi
-            git reset --hard $SOURCE_BRANCH
-            git push origin $TARGET --force || echo "Failed to force push $TARGET branch"
           done
