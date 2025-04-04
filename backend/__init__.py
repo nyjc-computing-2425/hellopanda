@@ -191,6 +191,72 @@ def update_year(email, new_year):
     conn.commit()
     conn.close()
 
+#Functions to update event data
+def update_year(id, start):
+    conn = sqlite3.connect('capstone.db')
+    cursor = conn.cursor()
+    
+    cursor.execute("""
+            UPDATE event
+            SET start_datetime = ?
+            WHERE id = ?;
+        """, [start, id])
+
+    conn.commit()
+    conn.close()
+
+def update_year(id, end):
+    conn = sqlite3.connect('capstone.db')
+    cursor = conn.cursor()
+    
+    cursor.execute("""
+            UPDATE event
+            SET end_datetime = ?
+            WHERE id = ?;
+        """, [end, id])
+
+    conn.commit()
+    conn.close()
+
+def update_year(id, topic):
+    conn = sqlite3.connect('capstone.db')
+    cursor = conn.cursor()
+    
+    cursor.execute("""
+            UPDATE event
+            SET topic = ?
+            WHERE id = ?;
+        """, [topic, id])
+
+    conn.commit()
+    conn.close()
+
+def update_year(id, synopsis):
+    conn = sqlite3.connect('capstone.db')
+    cursor = conn.cursor()
+    
+    cursor.execute("""
+            UPDATE event
+            SET synopsis = ?
+            WHERE id = ?;
+        """, [synopsis, id])
+
+    conn.commit()
+    conn.close()
+
+def update_year(id, venue):
+    conn = sqlite3.connect('capstone.db')
+    cursor = conn.cursor()
+    
+    cursor.execute("""
+            UPDATE event
+            SET venue = ?
+            WHERE id = ?;
+        """, [venue, id])
+
+    conn.commit()
+    conn.close()
+
 
 if __name__ == "__main__":
     create_account_table()
