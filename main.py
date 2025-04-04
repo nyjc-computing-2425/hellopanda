@@ -1,11 +1,11 @@
-from flask import Flask, abort, redirect
+from flask import Flask, abort, redirect, render_template
 
 app = Flask(__name__)
 
 
 @app.route('/') # Sprint 2 / MVP
 def index(): 
-    return render_template('home.html')
+    return render_template("pages/index.html")
     
 
 @app.route('/student') # Sprint 2 / MVP
@@ -15,7 +15,7 @@ def student_page():
 
 @app.route('/student/event_details')
 def student_event_details_page():
-    return "student event details page"
+    return render_template("studenteventdetails.html")
     
 
 @app.route('/login') # Sprint 2 / MVP
