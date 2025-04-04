@@ -1,27 +1,38 @@
-from flask import Flask, abort, redirect, render_template
+from flask import Flask, abort, redirect, render_template, request
+from validate import *
 
 app = Flask(__name__)
 
 
-@app.route('/') # Sprint 2 / MVP
-def index(): 
-    return render_template("pages/index.html")
-    
+@app.route('/')
+def index():
+    return redirect("/home")
 
-@app.route('/student') # Sprint 2 / MVP
+
+@app.route('/home')
+def home_page():
+    return "home page"
+
+
+@app.route('/student')
 def student_page():
-    return render_template('student.html')
-    
+    return "student page"
+
 
 @app.route('/student/event_details')
 def student_event_details_page():
-    return render_template("studenteventdetails.html")
-    
+    return "student event details page"
 
-@app.route('/login') # Sprint 2 / MVP
+
+@app.route('/login', methods=["GET", "POST"])
 def login_page():
-    return render_template('login.html')
-
+    if request.method == "GET":
+        return render_template("pages/login.html")
+    elif request.method == "POST":
+        if not email(request.form["email"]) or not password(request.form["password"]):
+            return render_template("pages/login.html", errormsg = "login unsuccessful")
+        return render_template("pages/login.html")
+    return redirect("/home")
 
 @app.route('/organiser')
 def organiser_page():
