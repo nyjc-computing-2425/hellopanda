@@ -1,5 +1,7 @@
 import sqlite3
 
+import backend.sql as sql
+
 # Create the table
 def create_account_table() -> None:
     """
@@ -8,18 +10,7 @@ def create_account_table() -> None:
     conn = sqlite3.connect('capstone.db')
     cursor = conn.cursor()
 
-    cursor.execute("""
-        CREATE TABLE IF NOT EXISTS "account" (
-            "email" TEXT NOT NULL,
-            "salt" TEXT NOT NULL,
-            "password" INTEGER NOT NULL,
-            "type" TEXT NOT NULL,
-            "name" TEXT NOT NULL,
-            "class" INTEGER,
-            "graduation_year" INTEGER,
-            PRIMARY KEY("email")
-        );
-    """)
+    cursor.execute(sql.CREATE_TABLE_ACCOUNT)
 
     conn.commit()
     conn.close()
