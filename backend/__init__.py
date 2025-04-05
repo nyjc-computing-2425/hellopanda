@@ -1,7 +1,9 @@
 import sqlite3
 
-import backend.sql as sql
+import sql as sql
 
+
+####################################ACCOUNT#################################
 # Create the table
 def create_account_table() -> None:
     """
@@ -15,7 +17,16 @@ def create_account_table() -> None:
     conn.commit()
     conn.close()
 
-
+#Delete account table
+def delete_account_table():
+    conn = sqlite3.connect('capstone.db')
+    cursor = conn.cursor()
+    cursor.execute("""
+            DROP TABLE IF EXISTS account
+        """)
+    
+    conn.commit()
+    conn.close()
 
 # Function to store account data
 def store_account_data(email, salt, password, _type, name, _class, graduation_year) -> None:
@@ -34,7 +45,7 @@ def store_account_data(email, salt, password, _type, name, _class, graduation_ye
         The hashed password
 
     _type: str
-        The account type (admin/student)
+        The account type (student/organiser)
 
     name: str
         The name of the user
@@ -138,6 +149,23 @@ def retrieve_byyear(year):
 
     return result
 
+def acc_type(email: str) -> str:
+    conn = sqlite3.connect('capstone.db')
+    cursor = conn.cursor()
+
+    cursor.execute("""
+            SELECT * FROM account
+            WHERE email = ?;
+        """,
+        [email]
+    )
+
+    result = cursor.fetchone()
+    print(result)
+    conn.commit()
+    conn.close()
+    return result[3]
+
 #Functions to update account data
 def update_name(email, new_name):
     conn = sqlite3.connect('capstone.db')
@@ -192,10 +220,32 @@ def update_year(email, new_year):
     conn.close()
 
 
+
+####################################EVENT##########################################
+def create_event_table():
+    """
+    Creates the account table
+    """
+    conn = sqlite3.connect('capstone.db')
+    cursor = conn.cursor()
+
+    cursor.execute(sql.CREATE_TABLE_EVENT)
+
+    conn.commit()
+    conn.close()
+
+#Delete account table
+def delete_event_table():
+    conn = sqlite3.connect('capstone.db')
+    cursor = conn.cursor()
+    cursor.execute("""
+            DROP TABLE IF EXISTS event
+        """)
+    
+    conn.commit()
+    conn.close()
+
+
 if __name__ == "__main__":
-    create_account_table()
-    store_account_data('3', '1', '123', '1', 'John Doe', 101, 2024)
-    print(retrieve_byname('John Doe'))
-    update_name('3','hehe')
-    # update_email('3','4')
-    print(retrieve_byname('hehe'))
+    create_event_table()
+    delete_account_table()
