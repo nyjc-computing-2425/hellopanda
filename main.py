@@ -1,11 +1,12 @@
-from flask import Flask, abort, redirect, render_template, request
-import validate
+from flask import Flask, abort, redirect, render_template
+
 app = Flask(__name__)
 
 
-@app.route('/')
-def index():
-    return render_template("/pages/index/index.html")
+@app.route('/') # Sprint 2 / MVP
+def index(): 
+    return render_template("pages/index.html")
+    
 
 @app.route('/student') # Sprint 2 / MVP
 def student_page():
@@ -14,21 +15,13 @@ def student_page():
 
 @app.route('/student/event_details')
 def student_event_details_page():
-    # Call function from backend to retrive all upcoming events
-    return render_template("pages/studenteventdetails/studenteventdetails.html", events=testfiles)
+    return render_template("studenteventdetails.html")
     
 
 @app.route('/login') # Sprint 2 / MVP
 def login_page():
-    if request.method == "GET":
-        return render_template("pages/login/login.html")
-    elif request.method == "POST":
-        username = request.form["username"]
-        password = request.form["password"]
-        if not(validate.email(username) and validate.password(password) and validate.authenticate(username,password)): # NOT WORKING since authenticate function has not been created by Backend
-            return render_template("pages/login/login.html", errormsg = "login unsuccessful")
-        return render_template("pages/login/login.html")
-    return redirect("/")
+    return render_template('login.html')
+
 
 @app.route('/organiser')
 def organiser_page():
@@ -48,4 +41,3 @@ def organiser_create_event_page():
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
 
-    
