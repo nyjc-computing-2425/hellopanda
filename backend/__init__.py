@@ -2,6 +2,8 @@ import sqlite3
 
 import sql as sql
 
+
+####################################ACCOUNT#################################
 # Create the table
 def create_account_table() -> None:
     """
@@ -15,7 +17,16 @@ def create_account_table() -> None:
     conn.commit()
     conn.close()
 
-
+#Delete account table
+def delete_account_table():
+    conn = sqlite3.connect('capstone.db')
+    cursor = conn.cursor()
+    cursor.execute("""
+            DROP TABLE IF EXISTS account
+        """)
+    
+    conn.commit()
+    conn.close()
 
 # Function to store account data
 def store_account_data(email, salt, password, _type, name, _class, graduation_year) -> None:
@@ -208,19 +219,33 @@ def update_year(email, new_year):
     conn.commit()
     conn.close()
 
-#Delete table contents
-def delete_table():
+
+
+####################################EVENT##########################################
+def create_event_table():
+    """
+    Creates the account table
+    """
+    conn = sqlite3.connect('capstone.db')
+    cursor = conn.cursor()
+
+    cursor.execute(sql.CREATE_TABLE_EVENT)
+
+    conn.commit()
+    conn.close()
+
+#Delete account table
+def delete_event_table():
     conn = sqlite3.connect('capstone.db')
     cursor = conn.cursor()
     cursor.execute("""
-            DELETE FROM account
+            DROP TABLE IF EXISTS event
         """)
     
     conn.commit()
     conn.close()
 
+
 if __name__ == "__main__":
-    delete_table()
-    create_account_table()
-    store_account_data('john@gmail.com', '1', '123456', 'student', 'John Doe', 2426, 2025)
-    print(acc_type('john@gmail.com'))
+    create_event_table()
+    delete_account_table()
