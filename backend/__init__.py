@@ -192,7 +192,7 @@ def update_year(email, new_year):
     conn.close()
 
 #Functions to update event data
-def update_year(id, start):
+def update_start(id, start):
     conn = sqlite3.connect('capstone.db')
     cursor = conn.cursor()
     
@@ -205,7 +205,7 @@ def update_year(id, start):
     conn.commit()
     conn.close()
 
-def update_year(id, end):
+def update_end(id, end):
     conn = sqlite3.connect('capstone.db')
     cursor = conn.cursor()
     
@@ -218,7 +218,7 @@ def update_year(id, end):
     conn.commit()
     conn.close()
 
-def update_year(id, topic):
+def update_topic(id, topic):
     conn = sqlite3.connect('capstone.db')
     cursor = conn.cursor()
     
@@ -231,7 +231,7 @@ def update_year(id, topic):
     conn.commit()
     conn.close()
 
-def update_year(id, synopsis):
+def update_synopsis(id, synopsis):
     conn = sqlite3.connect('capstone.db')
     cursor = conn.cursor()
     
@@ -244,7 +244,7 @@ def update_year(id, synopsis):
     conn.commit()
     conn.close()
 
-def update_year(id, venue):
+def update_venue(id, venue):
     conn = sqlite3.connect('capstone.db')
     cursor = conn.cursor()
     
@@ -256,6 +256,17 @@ def update_year(id, venue):
 
     conn.commit()
     conn.close()
+
+#Function to return list of all events
+def retrieve_event():
+        conn = sqlite3.connect('capstone.db')
+        cursor = conn.cursor()
+        cursor.execute("""
+            SELECT *
+            FROM event;
+        """)
+        lst = cursor.fetchall()
+        return lst
 
 
 if __name__ == "__main__":
