@@ -181,80 +181,44 @@ def delete_event_table():
 
 #Functions to update event data
 def update_start(id, start):
-    conn = sqlite3.connect('capstone.db')
-    cursor = conn.cursor()
-    
-    cursor.execute("""
-            UPDATE event
-            SET start_datetime = ?
-            WHERE id = ?;
-        """, [start, id])
-
-    conn.commit()
-    conn.close()
+    execute_query("""UPDATE event 
+                  SET start_datetime = ?
+                  WHERE id = ?""", [start, id])
 
 def update_end(id, end):
-    conn = sqlite3.connect('capstone.db')
-    cursor = conn.cursor()
-    
-    cursor.execute("""
+    execute_query("""
             UPDATE event
             SET end_datetime = ?
             WHERE id = ?;
         """, [end, id])
 
-    conn.commit()
-    conn.close()
-
 def update_topic(id, topic):
-    conn = sqlite3.connect('capstone.db')
-    cursor = conn.cursor()
-    
-    cursor.execute("""
+    execute_query("""
             UPDATE event
             SET topic = ?
             WHERE id = ?;
         """, [topic, id])
-
-    conn.commit()
-    conn.close()
-
-def update_synopsis(id, synopsis):
-    conn = sqlite3.connect('capstone.db')
-    cursor = conn.cursor()
     
-    cursor.execute("""
+def update_synopsis(id, synopsis):
+    execute_query("""
             UPDATE event
             SET synopsis = ?
             WHERE id = ?;
         """, [synopsis, id])
 
-    conn.commit()
-    conn.close()
-
 def update_venue(id, venue):
-    conn = sqlite3.connect('capstone.db')
-    cursor = conn.cursor()
-    
-    cursor.execute("""
+    execute_query("""
             UPDATE event
             SET venue = ?
             WHERE id = ?;
         """, [venue, id])
 
-    conn.commit()
-    conn.close()
-
 #Function to return list of all events
 def retrieve_event():
-        conn = sqlite3.connect('capstone.db')
-        cursor = conn.cursor()
-        cursor.execute("""
+        return execute_query("""
             SELECT *
             FROM event;
         """)
-        lst = cursor.fetchall()
-        return lst
 
 
 if __name__ == "__main__":
