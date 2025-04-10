@@ -1,16 +1,20 @@
 {% extends "template.html" %}
 
 {% block content %}
-    <h1>HeHEHEHHA</h1>
-    <h2>These are the events</h2>
-    <div>
-        {% for event in events %}
-            {% include "/components/event/event.html"%}
-            <br>
-        {% endfor %}
+    <div class="main-container">
+        <!-- Your main site content here (including .rounded-rectangle) -->
+        <h1>HeHEHEHHA</h1>
+        <h2>These are the events</h2>
+        <div>
+            {% for event in events %}
+                <div class="event-wrapper">
+                    {% include "/components/event/event.html" %}
+                </div>
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}
 
 {% block css %}
-    {% include "./pages/student/student.css" %}
+    {% include"/pages/student/student.css" %}
 {% endblock %}
