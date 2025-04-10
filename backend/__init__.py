@@ -21,4 +21,4 @@ if __name__ == "__main__":
     print(acc_type("john@gmail.com"))
 
     create_event_table()
-    store_event_data(1,)
+    store_event_data(1, )
