@@ -8,14 +8,15 @@
   }
 
   ul {
-      list-style-type: none; /* Removes the default bullet points */
-      padding: 0; /* Removes default padding */
-      text-align: center; /* Centers the list */
+      list-style-type: disc; /* Ensures bullet points */
+      padding-left: 20px; /* Keeps the left margin for bullets */
+      text-align: left; /* Aligns text to the left */
+      margin: 0 auto; /* Centers the list itself */
+      width: 50%; /* Control width to keep the margin consistent */
     }
 
     li {
-      display: block; /* Ensures each li is on its own line */
-      margin: 10px 0; /* Adds space between the list items */
+      margin-bottom: 10px; /* Adds space between items */
     }
 </style>
 {% endblock %}
