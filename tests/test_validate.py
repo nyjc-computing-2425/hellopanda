@@ -1,3 +1,10 @@
+# fix importing errors
+import sys
+import os
+project_root = os.path.abspath(os.path.dirname(__file__) + "/..")
+if project_root not in sys.path:
+    sys.path.append(project_root)
+
 import unittest
 import validate
 
@@ -59,3 +66,6 @@ class TestValidateClass(unittest.TestCase):
     def test_special_characters(self):
         self.assertTrue(validate.class_number('1234'))
         self.assertFalse(validate.class_number('24@26'))
+
+if __name__ == '__main__':
+    unittest.main()
