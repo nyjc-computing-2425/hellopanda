@@ -32,7 +32,7 @@ RETRIEVE_ACCOUNT_BYNAME = """
 
 RETRIEVE_ACCOUNT_BYCLASS = """
         SELECT * FROM account
-        WHERE clas = ?;
+        WHERE _class = ?;
     """
 
 RETRIEVE_ACCOUNT_BYEMAIL = """
