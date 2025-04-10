@@ -19,10 +19,8 @@
 		</div>
 	<button type="submit">LOGIN</button>
 	</form>
-	</div>
-	<div>
-	{% if error_message %}
-		{{error_message}}
+	{% if error_msg %}
+		<div><p style ="color:red;">{{error_msg}}</p></div>
 	{% endif %}
 	</div>
 {% endblock %}
