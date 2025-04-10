@@ -63,6 +63,25 @@ def organiser_events_page():
 def organiser_create_event_page():
     return "organiser create event page" 
 
+@app.route('/about')
+def about_page():
+    return render_template("pages/about/about.html")
+
+@app.route("/contact")
+def contact_page():
+    return render_template("pages/contact/contact.html")
+
+@app.route("/features")
+def features_page():
+    return render_template("pages/features/features.html")
+
+@app.route("/privacy")
+def privacy_page():
+    return render_template("pages/privacy/privacy.html")
+    
+@app.route("/terms")
+def terms_page():
+    return render_template("pages/terms/terms.html")
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5001, debug=True)
