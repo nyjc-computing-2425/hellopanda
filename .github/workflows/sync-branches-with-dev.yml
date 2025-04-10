@@ -1,4 +1,4 @@
-name: Sync Dev to Other Branches (Safe File Name Conflict)
+name: Sync Dev to Other Branches (Safe Merge)
 
 on:
   push:
@@ -22,7 +22,7 @@ jobs:
           git config user.name "GitHub Action"
           git config user.email "action@github.com"
 
-      - name: Forcefully Sync Dev into Other Branches
+      - name: Safely Merge Dev into Other Branches
         run: |
           SOURCE_BRANCH="dev"
           TARGETS=("qa" "frontend" "backend")
@@ -35,22 +35,16 @@ jobs:
               continue
             fi
 
-            echo "Force syncing $SOURCE_BRANCH into $TARGET"
+            echo "Merging $SOURCE_BRANCH into $TARGET"
 
-            # Safely fetch and checkout the branch
+            # Fetch and checkout the target branch
             git fetch origin $TARGET:$TARGET || true
             git checkout $TARGET
             git pull origin $TARGET
 
-            # Overwrite working directory with files from source branch
-            git checkout origin/$SOURCE_BRANCH -- .
+            # Merge dev into target branch
+            git merge origin/$SOURCE_BRANCH --no-ff -m "Merge $SOURCE_BRANCH into $TARGET"
 
-            # Stage and commit if there are changes
-            if [ -n "$(git status --porcelain)" ]; then
-              git add .
-              git commit -m "Force sync files from $SOURCE_BRANCH into $TARGET"
-              git push origin $TARGET
-            else
-              echo "No changes to push for $TARGET"
-            fi
+            # Push the merged branch
+            git push origin $TARGET
           done
