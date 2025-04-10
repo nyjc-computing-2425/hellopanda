@@ -1,7 +1,5 @@
 import sqlite3
 
-import sql as sql
-
 ####################################QUERY##################################
 def execute_query(query, params=None) -> list|None:
     """

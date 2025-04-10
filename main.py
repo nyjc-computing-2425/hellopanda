@@ -21,7 +21,7 @@ def student_event_details_page():
     return render_template("studenteventdetails.html")
     
 
-@app.route('/login', method = ["GET", "POST"]) # Sprint 2 / MVP
+@app.route('/login', methods = ["GET", "POST"]) # Sprint 2 / MVP
 def login_page():
     if request.method == "GET":
         return render_template('pages/login/login.html')
