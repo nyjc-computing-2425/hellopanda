@@ -1,4 +1,5 @@
 from .base import execute_query
+import datetime
 
 from . import sql
 
@@ -60,6 +61,18 @@ def update_venue(id, venue):
 
 #Function to return list of all events
 def retrieve_event():
-        return execute_query(sql.RETRIVE_EVENT)
+        return execute_query(sql.RETRIEVE_EVENT)
+
+def retrieve_current_event():
+    now = datetime.datetime.today()
+    events = retrieve_event()
+    lst = []
+    if events:
+        for dic in events:
+            start = dic['start_datetime']
+            end = dic['end_datetime']
+            if start <= now <= end:
+                lst.append(dic)
+    return lst
 
 
