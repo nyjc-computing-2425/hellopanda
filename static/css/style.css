@@ -45,17 +45,21 @@
 
 .main-container-student {
     margin-left: 40px; /* Add a 40px margin to the entire content */
-    padding-top: 20px; /* Optional: Push content down to avoid overlap with fixed navbar */
+    padding-top: 10px; /* Optional: Push content down to avoid overlap with fixed navbar */
+    padding-left: 10%;
+    width: 100%; /* Ensures the container takes full width */
 }
 
 .event-head-rounded-rectangle {
-    width: 300px; /* Adjust width as needed */
-    background-color: #4CAF50; /* Background color for the event */
+    width: 80%; /* Adjust width as needed */
+    background-color: #454a45; /* Background color for the event */
     color: white; /* Text color */
     border-radius: 25px; /* Rounded corners */
     padding: 20px; /* Padding inside the rectangle */
-    text-align: center; /* Center the text */
+    text-align: center; /* Align text to the left */
     font-family: Arial, sans-serif; /* Font style */
-    margin: 20px auto; /* Center the rectangle on the page */
+    font-size: 30px;
+    font-weight: bold;
+    margin: 20px 0 20px 0px; /* 20px margin from the top, right, and bottom, and 20px from the left */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a slight shadow */
 }
