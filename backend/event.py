@@ -63,26 +63,24 @@ def update_venue(id, venue):
 def retrieve_event():
         return execute_query(sql.RETRIEVE_EVENT)
 
-def retrieve_current_event():
-    now = datetime.datetime.today()
-    events = retrieve_event()
-    lst = []
-    if events:
-        for dic in events:
-            start = dic['start_datetime']
-            end = dic['end_datetime']
-            if start <= now <= end:
-                lst.append(dic)
-    return lst
-
-
-def retrieve_upcoming_event():
+def retrieve_current_events():
     x = str(datetime.datetime.now())
     x = x[:19]
 
     return execute_query("""
         SELECT *
         FROM event
-        WHERE (start_datetime>x)
-"""    )
+        WHERE (start_datetime<=? AND end_datetime>=?)
+    """,[x, x])
+
+
+def retrieve_upcoming_events():
+    x = str(datetime.datetime.now())
+    x = x[:19]
+
+    return execute_query("""
+        SELECT *
+        FROM event
+        WHERE (start_datetime>?)
+    """,[x]   )
 
