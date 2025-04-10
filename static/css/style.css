@@ -7,4 +7,18 @@
     justify-content: center;
     align-items: center;
     border-radius: 25px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    font-size: 28px; /* ← Increased font size */
+}
+
+.rectangle-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.event-wrapper {
+    margin-bottom: 20px; /* space between events */
 }
