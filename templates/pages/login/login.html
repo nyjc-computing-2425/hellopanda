@@ -20,6 +20,11 @@
 	<button type="submit">LOGIN</button>
 	</form>
 	</div>
+	<div>
+	{% if error_message %}
+		{{error_message}}
+	{% endif %}
+	</div>
 {% endblock %}
 
 {% block css %}
