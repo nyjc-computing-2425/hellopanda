@@ -1,3 +1,6 @@
+from . import account
+from . import password as pwd
+
 def email(email_):
     if email_.count('@') != 1:
         return False
@@ -47,3 +50,13 @@ def class_number(class_):
             return False
         
     return True
+
+
+
+def authenticate(username: str, password: str) -> bool:
+    if not account.check_email(username):
+        return False
+    data = account.retrieve_byemail(username)[0]
+    res = pwd.validate_password(password, data["password"], data["salt"])
+    return res
+
