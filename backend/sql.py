@@ -16,6 +16,10 @@ CREATE_TABLE_ACCOUNT = """
         );
     """
 
+DELETE_TABLE_ACCOUNT = """
+        DROP TABLE IF EXISTS account
+    """
+
 INSERT_INTO_ACCOUNT = """
         INSERT INTO account (email, salt, password, type, name, class, graduation_year)
         VALUES (?, ?, ?, ?, ?, ?, ?)
