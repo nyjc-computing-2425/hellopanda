@@ -134,6 +134,10 @@ def acc_type(email: str) -> str:
 
     return result[0]["_type"] if result else "Email does not exist"
 
+def check_email(email):
+    return retrieve_byemail(email)!=[]
+
+
 #Functions to update account data
 def update_name(email, new_name):
     execute_query("""
@@ -221,8 +225,11 @@ def retrieve_event():
         """)
 
 
+
 if __name__ == "__main__":
     create_account_table()
     #store_account_data("notjohn@gmail.com", "salty", 123, "student", "hehe", 2426, 2025)
     update_class("notjohn@gmail.com", 2426)
     print(acc_type("joh@gmail.com"))
+
+
