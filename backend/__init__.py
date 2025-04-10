@@ -17,4 +17,8 @@ if __name__ == "__main__":
     create_account_table()
     #store_account_data("notjohn@gmail.com", "salty", 123, "student", "hehe", 2426, 2025)
     update_class("notjohn@gmail.com", 2426)
-    print(acc_type("joh@gmail.com"))
+    print(retrieve_byclass(2426))
+    print(acc_type("john@gmail.com"))
+
+    create_event_table()
+    store_event_data(1,)
