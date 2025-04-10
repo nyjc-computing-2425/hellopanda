@@ -1,7 +1,3 @@
-import sqlite3
-
-import sql as sql
-
 # account functions are moved to account.py
 # if you were using:
 #     import backend
@@ -9,5 +5,16 @@ import sql as sql
 #    from backend import account
 #    from backend import event
 
+from . import account, event, sql
+
+# The below usage will be deprecated in Sprint 4
 from .account import *
 from .event import *
+
+
+
+if __name__ == "__main__":
+    create_account_table()
+    #store_account_data("notjohn@gmail.com", "salty", 123, "student", "hehe", 2426, 2025)
+    update_class("notjohn@gmail.com", 2426)
+    print(acc_type("joh@gmail.com"))
