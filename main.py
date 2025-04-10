@@ -2,6 +2,10 @@ from flask import Flask, abort, redirect, render_template
 
 app = Flask(__name__)
 
+#temp func
+def get_events():
+    return [{"id": "brawl", "topic": "brawl stars"}, 
+            {"id": "nbd", "topic": "no bag day"}]
 
 @app.route('/') # Sprint 2 / MVP
 def index(): 
@@ -15,13 +19,8 @@ def student_page():
     # 2. Pass this data to render template
      # (Optional) Create placeholder data on our end and pass it to render_template for testing
     
-    return render_template('pages/student/student.html')
-    
-
-@app.route('/student/event_details')
-def student_event_details_page():
-   return render_template("pages/studenteventdetails/studenteventdetails.html")
-    
+    events = get_events()
+    return render_template('pages/student/student.html', events = events)
 
 @app.route('/login') # Sprint 2 / MVP
 def login_page():
