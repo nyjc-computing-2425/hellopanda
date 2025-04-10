@@ -1,0 +1,4 @@
+.main-container {
+    margin-left: 20px; /* Add a 20px margin to the entire content */
+    padding-top: 60px; /* Optional: Push content down to avoid overlap with fixed navbar */
+}
