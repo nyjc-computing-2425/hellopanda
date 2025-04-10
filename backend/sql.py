@@ -112,7 +112,7 @@ UPDATE_EVENT_SYNOPSIS = """UPDATE event
         WHERE id = ?
     """
 
-UPDATE_EVENT_TOPIC = """UPDATE event 
+UPDATE_EVENT_VENUE = """UPDATE event 
         SET venue = ?
         WHERE id = ?
     """
