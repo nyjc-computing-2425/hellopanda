@@ -69,3 +69,54 @@ UPDATE_ACCOUNT_YEAR = """
         WHERE email = ?;
     """
 
+
+#EVENTS
+CREATE_TABLE_EVENTS = """
+        CREATE TABLE IF NOT EXISTS "account" (
+            "id" INTEGER NOT NULL,
+            "start_datetime" TEXT NOT NULL,
+            "end_datetime" TEXT NOT NULL,
+            "topic" TEXT NOT NULL,
+            "synopsis" TEXT NOT NULL,
+            "venue" TEXT,
+            PRIMARY KEY("id")
+        );
+    """
+
+DELETE_TABLE_EVENT = """
+        DROP TABLE IF EXISTS event
+    """
+
+INSERT_INTO_EVENT = """
+        INSERT INTO event (id, start_datetime, end_datetime, topic, synopsis, venue)
+        VALUES (?, ?, ?, ?, ?, ?)
+    """
+
+UPDATE_EVENT_START = """UPDATE event 
+        SET start_datetime = ?
+        WHERE id = ?
+    """
+
+UPDATE_EVENT_END = """UPDATE event 
+        SET end_datetime = ?
+        WHERE id = ?
+    """
+
+UPDATE_EVENT_TOPIC = """UPDATE event 
+        SET topic = ?
+        WHERE id = ?
+    """
+
+UPDATE_EVENT_SYNOPSIS = """UPDATE event 
+        SET synopsis = ?
+        WHERE id = ?
+    """
+
+UPDATE_EVENT_TOPIC = """UPDATE event 
+        SET venue = ?
+        WHERE id = ?
+    """
+RETRIEVE_EVENT = """
+        SELECT *
+        FROM event;
+    """
