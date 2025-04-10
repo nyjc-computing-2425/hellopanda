@@ -9,7 +9,7 @@ def get_events():
 
 @app.route('/') # Sprint 2 / MVP
 def index(): 
-    return render_template("pages/index/index.html")
+    return render_template("pages/index.html")
     
 
 @app.route('/student') # Sprint 2 / MVP
@@ -24,7 +24,7 @@ def student_page():
 
 @app.route('/login') # Sprint 2 / MVP
 def login_page():
-    return render_template('pages/login/login.html')
+    return render_template('login.html')
 
 
 @app.route('/organiser')
@@ -41,7 +41,27 @@ def organiser_events_page():
 def organiser_create_event_page():
     return "organiser create event page" 
 
+@app.route('/about')
+def about_page():
+    return render_template("pages/about/about.html")
+
+@app.route("/contact")
+def contact_page():
+    return render_template("pages/contact/contact.html")
+
+@app.route("/features")
+def features_page():
+    return render_template("pages/features/features.html")
+
+@app.route("/privacy")
+def privacy_page():
+    return render_template("pages/privacy/privacy.html")
+    
+@app.route("/terms")
+def terms_page():
+    return render_template("pages/terms/terms.html")
+
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5001, debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
 
