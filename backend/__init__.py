@@ -178,6 +178,37 @@ def delete_event_table():
             DROP TABLE IF EXISTS event
         """)
 
+# Function to store account data
+def store_event_data(id, start, end, topic, synopsis, venue) -> None:
+    """
+    Stores account data
+
+    Parameters
+    -------------
+    id: int
+        The id of the student
+
+    start: int
+        The starting date of event
+
+    end: int
+        The end
+
+    topic: str
+        The topic of the event
+
+    venue: str
+        The venue of event
+        
+    synopsis: str
+        brief summary of event
+        
+    """
+    execute_query("""
+        INSERT INTO event (id, start_datetime, end_datetime, topic, synopsis, venue)
+        VALUES (?, ?, ?, ?, ?, ?)
+        """,
+        [id, start, end, topic, synopsis, venue])
 
 #Functions to update event data
 def update_start(id, start):
