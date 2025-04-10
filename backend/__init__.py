@@ -39,9 +39,7 @@ def create_account_table() -> None:
 
 #Delete account table
 def delete_account_table():
-    execute_query("""
-            DROP TABLE IF EXISTS account
-        """)
+    execute_query(sql.DELETE_TABLE_ACCOUNT)
 
 # Function to store account data
 def store_account_data(email, salt, password, _type, name, _class, graduation_year) -> None:
@@ -72,10 +70,7 @@ def store_account_data(email, salt, password, _type, name, _class, graduation_ye
         The grad year of the student. None if user is an admin
         
     """
-    execute_query("""
-        INSERT INTO account (email, salt, password, _type, name, _class, graduation_year)
-        VALUES (?, ?, ?, ?, ?, ?, ?)
-        """,
+    execute_query(sql.INSERT_INTO_ACCOUNT,
         [email, salt, password, _type, name, _class, graduation_year])
 
 
@@ -95,40 +90,25 @@ def retrieve_byname(name):
     list
         The result of the search as a list of dictionaries
     """
-    return execute_query("""
-            SELECT * FROM account
-            WHERE name = ?;
-        """,[name])
+    return execute_query(sql.RETRIEVE_ACCOUNT_BYNAME,[name])
 
 def retrieve_byclass(clas):
-    return execute_query("""
-            SELECT * FROM account
-            WHERE _class = ?;
-        """,[clas])
+    return execute_query(sql.RETRIEVE_ACCOUNT_BYCLASS,[clas])
     
 
 def retrieve_byemail(email):
 
-    return execute_query("""
-            SELECT * FROM account
-            WHERE email = ?;
-        """, 
+    return execute_query(sql.RETRIEVE_ACCOUNT_BYEMAIL, 
         [email]
     )
 
 def retrieve_byyear(year):
-    return execute_query("""
-            SELECT * FROM account
-            WHERE year = ?;
-        """,
+    return execute_query(sql.RETRIEVE_ACCOUNT_BYYEAR,
         [year]
     )
 
 def acc_type(email: str) -> str:
-    result = execute_query("""
-            SELECT * FROM account
-            WHERE email = ?;
-        """,
+    result = execute_query(sql.RETRIEVE_ACCOUNT_BYEMAIL,
         [email]
     )
 
@@ -136,32 +116,16 @@ def acc_type(email: str) -> str:
 
 #Functions to update account data
 def update_name(email, new_name):
-    execute_query("""
-            UPDATE account
-            SET name = ?
-            WHERE email = ?;
-        """, [new_name, email])
+    execute_query(sql.UPDATE_ACCOUNT_NAME, [new_name, email])
 
 def update_class(email, new_class):
-    execute_query("""
-            UPDATE account
-            SET _class = ?
-            WHERE email = ?;
-        """, [new_class, email])
+    execute_query(sql.UPDATE_ACCOUNT_CLASS, [new_class, email])
 
 def update_email(email, new_email):
-    execute_query("""
-            UPDATE account
-            SET email = ?
-            WHERE email = ?;
-        """, [new_email, email])
+    execute_query(sql.UPDATE_ACCOUNT_EMAIL, [new_email, email])
     
 def update_year(email, new_year):
-    execute_query("""
-            UPDATE account
-            SET year = ?
-            WHERE email = ?;
-        """, [new_year, email])
+    execute_query(sql.UPDATE_ACCOUNT_YEAR, [new_year, email])
 
 
 
