@@ -20,6 +20,7 @@ if __name__ == "__main__":
     #print(retrieve_byclass(2426))
     #print(acc_type("john@gmail.com"))
 
-    create_event_table()
-    store_event_data(1, "2025-06-12 09:00:00", "2025-06-13 09:00:00", "Bad event", "hi  imagine events", "Home")
-    print(retrieve_event())
+    # create_event_table()
+    # store_event_data(1, "2025-06-12 09:00:00", "2025-06-13 09:00:00", "Bad event", "hi  imagine events", "Home")
+    # print(retrieve_event())
+    pass
