@@ -42,6 +42,10 @@ def organiser_events_page():
 def organiser_create_event_page():
     return "organiser create event page" 
 
+@app.route('/about')
+def about_page():
+    return render_template("pages/about/about.html")
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5001, debug=True)
