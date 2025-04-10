@@ -21,7 +21,7 @@ DELETE_TABLE_ACCOUNT = """
     """
 
 INSERT_INTO_ACCOUNT = """
-        INSERT INTO account (email, salt, password, type, name, class, graduation_year)
+        INSERT INTO account (email, salt, password, _type, name, _class, graduation_year)
         VALUES (?, ?, ?, ?, ?, ?, ?)
     """
 
@@ -53,7 +53,7 @@ UPDATE_ACCOUNT_NAME = """
 
 UPDATE_ACCOUNT_CLASS = """
         UPDATE account
-        SET clas = ?
+        SET _class = ?
         WHERE email = ?;
     """
 
