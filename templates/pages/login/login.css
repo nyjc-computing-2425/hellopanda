@@ -1,0 +1,54 @@
+.container{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width:100%;
+	height:100vh;
+	flex-direction:column;
+	gap:10px;
+    margin-top: -90px;
+	}
+
+	.input-box{
+		position: relative;
+	}
+	.input-box input {
+		width: 750px;
+		padding: 12px 12px 12px 40px;
+		font-size: 16px;
+		border: 2px solid #ccc;
+		border-radius: 5px;
+		background-color: #f0f0f0;
+	}
+	
+	.input-box i{
+		position: absolute;
+		left: 12px;
+		top: 50%;
+		transform: translateY(-50%);
+		color: #999;
+		font-size: 18px;
+	}
+	
+	.label{
+		font-size: 15px;
+		font-weight: 700;
+		width: 750px;
+		text-align: left;
+		font-family: montserrat;
+	}
+	
+	button{
+		margin-top: 15px;
+		width: 10%;
+		font-size: 25px;
+		background: red;
+		font-family: league spartan;
+		color: white;
+		font-weight: 900;
+		border-style: none;
+	}
+	
+	button:hover{
+		box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+	}
