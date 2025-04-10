@@ -1,5 +1,6 @@
 import unittest
-import validate
+
+from backend import validate
 
 class TestValidateEmail(unittest.TestCase):
     def test_at_symbol(self):
