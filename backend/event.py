@@ -8,7 +8,7 @@ def create_event_table():
     """
     Creates the account table
     """
-    execute_query(sql.CREATE_TABLE_EVENT) # type: ignore
+    execute_query(sql.CREATE_TABLE_EVENTS) # type: ignore
 
 #Delete account table
 def delete_event_table():
