@@ -10,8 +10,8 @@ import sqlite3
 
 import backend
 
-class TestStoreAccountData(unittest.TestCase):
-    def test_(self):
+class TestAccountRetrieveFunctions(unittest.TestCase):
+    def test_store(self):
         conn = sqlite3.connect('tests/test.db')
         
         conn.execute(backend.sql.CREATE_TABLE_ACCOUNT)
@@ -26,6 +26,34 @@ class TestStoreAccountData(unittest.TestCase):
         conn.commit()
         
         conn.close()
+
+    def test_retrieve_by_name(self):
+        pass
+
+    def test_retrieve_by_class(self):
+        pass
+
+    def test_retrieve_by_email(self):
+        pass
+
+    def test_retrieve_by_year(self):
+        pass
+
+    def test_get_account_type(self):
+        pass
+
+class TestAccountUpdateFunctions(unittest.TestCase):
+    def test_update_name(self):
+        pass
+
+    def test_update_class(self):
+        pass
+
+    def test_update_email(self):
+        pass
+
+    def test_update_year(self):
+        pass
 
 if __name__ == "__main__":
     unittest.main()
