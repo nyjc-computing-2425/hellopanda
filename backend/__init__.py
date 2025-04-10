@@ -170,7 +170,7 @@ def create_event_table():
     """
     Creates the account table
     """
-    execute_query(sql.CREATE_TABLE_EVENT)
+    execute_query(sql.CREATE_TABLE_EVENT) # type: ignore
 
 #Delete account table
 def delete_event_table():
@@ -178,10 +178,10 @@ def delete_event_table():
             DROP TABLE IF EXISTS event
         """)
 
-# Function to store account data
+# Function to store event data
 def store_event_data(id, start, end, topic, synopsis, venue) -> None:
     """
-    Stores account data
+    Stores event data
 
     Parameters
     -------------
@@ -197,12 +197,12 @@ def store_event_data(id, start, end, topic, synopsis, venue) -> None:
     topic: str
         The topic of the event
 
+    synopsis: str
+        brief summary of even
+
     venue: str
         The venue of event
-        
-    synopsis: str
-        brief summary of event
-        
+          
     """
     execute_query("""
         INSERT INTO event (id, start_datetime, end_datetime, topic, synopsis, venue)
