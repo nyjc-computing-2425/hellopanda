@@ -15,3 +15,53 @@ CREATE_TABLE_ACCOUNT = """
             PRIMARY KEY("email")
         );
     """
+
+INSERT_INTO_ACCOUNT = """
+        INSERT INTO account (email, salt, password, type, name, class, graduation_year)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
+    """
+
+RETRIEVE_ACCOUNT_BYNAME = ("""
+        SELECT * FROM account
+        WHERE name = ?;
+    """
+
+RETRIEVE_ACCOUNT_BYCLASS = ("""
+        SELECT * FROM account
+        WHERE _class = ?;
+    """
+
+RETRIEVE_ACCOUNT_BYEMAIL = ("""
+        SELECT * FROM account
+        WHERE email = ?;
+    """
+
+RETRIEVE_ACCOUNT_BYYEAR = ("""
+        SELECT * FROM account
+        WHERE year = ?;
+    """
+
+UPDATE_ACCOUNT_NAME = """
+        UPDATE account
+        SET name = ?
+        WHERE email = ?;
+    """
+
+UPDATE_ACCOUNT_CLASS = """
+        UPDATE account
+        SET _class = ?
+        WHERE email = ?;
+    """
+
+UPDATE_ACCOUNT_EMAIL = """
+        UPDATE account
+        SET email = ?
+        WHERE email = ?;
+    """
+
+UPDATE_ACCOUNT_YEAR = """
+        UPDATE account
+        SET year = ?
+        WHERE email = ?;
+    """
+
