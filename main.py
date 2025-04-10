@@ -13,12 +13,8 @@ def index():
 
 @app.route('/student') # Sprint 2 / MVP
 def student_page():
-    return render_template('student.html')
-    
-
-@app.route('/student/event_details')
-def student_event_details_page():
-    return render_template("studenteventdetails.html")
+    return render_template('/pages/student/student.html', events= [{"id":"blm day", "topic":"gimme fried chicken"},
+                                                                   {"id":"reverse blm day", "topic":"steal my fried chicken"}])
     
 
 @app.route('/login', methods = ["GET", "POST"]) # Sprint 2 / MVP
