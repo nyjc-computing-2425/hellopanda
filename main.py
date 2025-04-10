@@ -26,8 +26,8 @@ def login_page():
     if request.method == "GET":
         return render_template('pages/login/login.html')
     else:
-        user = request.form["user-field"]
-        pw = request.form["pass-field"]
+        user = request.form["username"]
+        pw = request.form["password"]
 
 
         authenticated = False
