@@ -1,10 +1,14 @@
 {% extends "template.html" %}
 
 {% block content %}
-    <div class="main-container">
-        <!-- Your main site content here (including .rounded-rectangle) -->
-        <h1>HeHEHEHHA</h1>
-        <h2>These are the events</h2>
+    <div class="main-container-student">
+        
+        <div class="event-head-rounded-rectangle">
+            live events: 
+        </div>
+
+
+        <div class="head-event-display">These are the events</div>
         <div>
             {% for event in events %}
                 <div class="event-wrapper">

@@ -1,7 +1,23 @@
-.rounded-rectangle {
+.rounded-rectangle { 
     width: 300px;
-    height: 150px;
-    background-color: #4CAF50;
+    height: auto; /* Let the height adjust based on content */
+    background-color: #a3aca4;
+    color: white;
+    display: flex;
+    flex-direction: column; /* Arrange ID and Topic vertically */
+    justify-content: flex-start; /* Align items at the top */
+    align-items: center;
+    border-radius: 25px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    font-size: 20px; /* ← Increased font size */
+    padding: 10px; /* Add some padding */
+}
+
+.head-event-display {
+    width: 250px;
+    height: 60px;
+    background-color: #a3aca4;
     color: white;
     display: flex;
     justify-content: center;
@@ -9,16 +25,37 @@
     border-radius: 25px;
     text-align: center;
     font-family: Arial, sans-serif;
-    font-size: 28px; /* ← Increased font size */
+    font-size: 20px; 
+    margin-bottom: 20px;
 }
 
 .rectangle-content {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: column; /* Stack ID and Topic vertically */
+    justify-content: flex-start; /* Align them at the top */
     align-items: center;
+    margin: 5px 0; /* Add some margin between ID and Topic */
+    word-wrap: break-word; /* Allow text to wrap */
+    white-space: normal; /* Allow wrapping of text */
 }
 
 .event-wrapper {
     margin-bottom: 20px; /* space between events */
+}
+
+.main-container-student {
+    margin-left: 40px; /* Add a 40px margin to the entire content */
+    padding-top: 20px; /* Optional: Push content down to avoid overlap with fixed navbar */
+}
+
+.event-head-rounded-rectangle {
+    width: 300px; /* Adjust width as needed */
+    background-color: #4CAF50; /* Background color for the event */
+    color: white; /* Text color */
+    border-radius: 25px; /* Rounded corners */
+    padding: 20px; /* Padding inside the rectangle */
+    text-align: center; /* Center the text */
+    font-family: Arial, sans-serif; /* Font style */
+    margin: 20px auto; /* Center the rectangle on the page */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a slight shadow */
 }
