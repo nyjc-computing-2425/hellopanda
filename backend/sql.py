@@ -72,7 +72,7 @@ UPDATE_ACCOUNT_YEAR = """
 
 #EVENTS
 CREATE_TABLE_EVENTS = """
-        CREATE TABLE IF NOT EXISTS "account" (
+        CREATE TABLE IF NOT EXISTS "event" (
             "id" INTEGER NOT NULL,
             "start_datetime" TEXT NOT NULL,
             "end_datetime" TEXT NOT NULL,
