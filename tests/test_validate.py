@@ -6,7 +6,8 @@ if project_root not in sys.path:
     sys.path.append(project_root)
 
 import unittest
-import validate
+
+from backend import validate
 
 class TestValidateEmail(unittest.TestCase):
     def test_at_symbol(self):
