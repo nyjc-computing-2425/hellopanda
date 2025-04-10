@@ -9,7 +9,7 @@ def get_events():
 
 @app.route('/') # Sprint 2 / MVP
 def index(): 
-    return render_template("pages/index.html")
+    return render_template("pages/index/index.html")
     
 
 @app.route('/student') # Sprint 2 / MVP
