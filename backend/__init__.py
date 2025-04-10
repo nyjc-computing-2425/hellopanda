@@ -2,32 +2,6 @@ import sqlite3
 
 import sql as sql
 
-####################################QUERY##################################
-def execute_query(query, params=None) -> list|None:
-    """
-    Executes a SQL query. Automatically returns results for SELECT queries,
-    and commits changes for INSERT/UPDATE/DELETE/DDL statements.
-
-    Returns:
-        list[dict] if SELECT query, else None
-    """
-    conn = sqlite3.connect('capstone.db')
-    conn.row_factory = sqlite3.Row
-    cursor = conn.cursor()
-
-    try:
-        cursor.execute(query, params or [])
-        
-        if query.strip().lower().startswith("select"):
-            rows = cursor.fetchall()
-            return [dict(row) for row in rows]
-    except Exception as e:
-        print("SQL Error:", e)
-        #raise
-    finally:
-        conn.commit()
-        conn.close()
-
 
 ####################################ACCOUNT#################################
 # Create the table
@@ -35,13 +9,24 @@ def create_account_table() -> None:
     """
     Creates the account table
     """
-    execute_query(sql.CREATE_TABLE_ACCOUNT)
+    conn = sqlite3.connect('capstone.db')
+    cursor = conn.cursor()
+
+    cursor.execute(sql.CREATE_TABLE_ACCOUNT)
+
+    conn.commit()
+    conn.close()
 
 #Delete account table
 def delete_account_table():
-    execute_query("""
+    conn = sqlite3.connect('capstone.db')
+    cursor = conn.cursor()
+    cursor.execute("""
             DROP TABLE IF EXISTS account
         """)
+    
+    conn.commit()
+    conn.close()
 
 # Function to store account data
 def store_account_data(email, salt, password, _type, name, _class, graduation_year) -> None:
@@ -72,16 +57,22 @@ def store_account_data(email, salt, password, _type, name, _class, graduation_ye
         The grad year of the student. None if user is an admin
         
     """
-    execute_query("""
-        INSERT INTO account (email, salt, password, _type, name, _class, graduation_year)
+    conn = sqlite3.connect('capstone.db')
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        INSERT INTO account (email, salt, password, type, name, class, graduation_year)
         VALUES (?, ?, ?, ?, ?, ?, ?)
         """,
         [email, salt, password, _type, name, _class, graduation_year])
 
+    conn.commit()
+    conn.close()
+
 
 
 #Functions to retieve account data
-def retrieve_byname(name):
+def retrieve_byname(name) -> list:
     """
     Returns a list of students with the given name
 
@@ -93,75 +84,140 @@ def retrieve_byname(name):
     Returns
     -------------
     list
-        The result of the search as a list of dictionaries
+        The result of the search
     """
-    return execute_query("""
+    conn = sqlite3.connect('capstone.db')
+    cursor = conn.cursor()
+
+    cursor.execute("""
             SELECT * FROM account
             WHERE name = ?;
         """,[name])
+    result = cursor.fetchall()
+
+    conn.commit()
+    conn.close()
+    
+    return result
 
 def retrieve_byclass(clas):
-    return execute_query("""
+    conn = sqlite3.connect('capstone.db')
+    cursor = conn.cursor()
+    
+    cursor.execute("""
             SELECT * FROM account
             WHERE _class = ?;
         """,[clas])
+    result = cursor.fetchall()
+
+    conn.commit()
+    conn.close()
     
+    return result
 
 def retrieve_byemail(email):
-
-    return execute_query("""
+    conn = sqlite3.connect('capstone.db')
+    cursor = conn.cursor()
+    
+    cursor.execute("""
             SELECT * FROM account
             WHERE email = ?;
         """, 
         [email]
     )
+    result = cursor.fetchall()
+
+    conn.commit()
+    conn.close()
+
+    return result
 
 def retrieve_byyear(year):
-    return execute_query("""
+    conn = sqlite3.connect('capstone.db')
+    cursor = conn.cursor()
+    
+    cursor.execute("""
             SELECT * FROM account
             WHERE year = ?;
         """,
         [year]
     )
+    result = cursor.fetchall()
+
+    conn.commit()
+    conn.close()
+
+    return result
 
 def acc_type(email: str) -> str:
-    result = execute_query("""
+    conn = sqlite3.connect('capstone.db')
+    cursor = conn.cursor()
+
+    cursor.execute("""
             SELECT * FROM account
             WHERE email = ?;
         """,
         [email]
     )
 
-    return result[0]["_type"] if result else "Email does not exist"
+    result = cursor.fetchone()
+    print(result)
+    conn.commit()
+    conn.close()
+    return result[3]
 
 #Functions to update account data
 def update_name(email, new_name):
-    execute_query("""
+    conn = sqlite3.connect('capstone.db')
+    cursor = conn.cursor()
+    
+    cursor.execute("""
             UPDATE account
             SET name = ?
             WHERE email = ?;
         """, [new_name, email])
 
+    conn.commit()
+    conn.close()
+
 def update_class(email, new_class):
-    execute_query("""
+    conn = sqlite3.connect('capstone.db')
+    cursor = conn.cursor()
+    
+    cursor.execute("""
             UPDATE account
             SET _class = ?
             WHERE email = ?;
         """, [new_class, email])
+    
+    conn.commit()
+    conn.close()
 
 def update_email(email, new_email):
-    execute_query("""
+    conn = sqlite3.connect('capstone.db')
+    cursor = conn.cursor()
+    
+    cursor.execute("""
             UPDATE account
             SET email = ?
             WHERE email = ?;
         """, [new_email, email])
     
+    conn.commit()
+    conn.close()
+
 def update_year(email, new_year):
-    execute_query("""
+    conn = sqlite3.connect('capstone.db')
+    cursor = conn.cursor()
+    
+    cursor.execute("""
             UPDATE account
             SET year = ?
             WHERE email = ?;
         """, [new_year, email])
+
+    conn.commit()
+    conn.close()
 
 
 
@@ -170,59 +226,26 @@ def create_event_table():
     """
     Creates the account table
     """
-    execute_query(sql.CREATE_TABLE_EVENT)
+    conn = sqlite3.connect('capstone.db')
+    cursor = conn.cursor()
+
+    cursor.execute(sql.CREATE_TABLE_EVENT)
+
+    conn.commit()
+    conn.close()
 
 #Delete account table
 def delete_event_table():
-    execute_query("""
+    conn = sqlite3.connect('capstone.db')
+    cursor = conn.cursor()
+    cursor.execute("""
             DROP TABLE IF EXISTS event
         """)
-
-
-#Functions to update event data
-def update_start(id, start):
-    execute_query("""UPDATE event 
-                  SET start_datetime = ?
-                  WHERE id = ?""", [start, id])
-
-def update_end(id, end):
-    execute_query("""
-            UPDATE event
-            SET end_datetime = ?
-            WHERE id = ?;
-        """, [end, id])
-
-def update_topic(id, topic):
-    execute_query("""
-            UPDATE event
-            SET topic = ?
-            WHERE id = ?;
-        """, [topic, id])
     
-def update_synopsis(id, synopsis):
-    execute_query("""
-            UPDATE event
-            SET synopsis = ?
-            WHERE id = ?;
-        """, [synopsis, id])
-
-def update_venue(id, venue):
-    execute_query("""
-            UPDATE event
-            SET venue = ?
-            WHERE id = ?;
-        """, [venue, id])
-
-#Function to return list of all events
-def retrieve_event():
-        return execute_query("""
-            SELECT *
-            FROM event;
-        """)
+    conn.commit()
+    conn.close()
 
 
 if __name__ == "__main__":
-    create_account_table()
-    #store_account_data("notjohn@gmail.com", "salty", 123, "student", "hehe", 2426, 2025)
-    update_class("notjohn@gmail.com", 2426)
-    print(acc_type("joh@gmail.com"))
+    create_event_table()
+    delete_account_table()

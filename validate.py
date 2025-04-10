@@ -39,8 +39,7 @@ def name(name_):
         
     return True
 
-def class_number(class_: int):
-    class_ = str(class_)
+def class_number(class_):
     if len(class_) != 4:
         return False
     for char in class_:
