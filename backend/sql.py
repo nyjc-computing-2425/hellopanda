@@ -21,22 +21,22 @@ INSERT_INTO_ACCOUNT = """
         VALUES (?, ?, ?, ?, ?, ?, ?)
     """
 
-RETRIEVE_ACCOUNT_BYNAME = ("""
+RETRIEVE_ACCOUNT_BYNAME = """
         SELECT * FROM account
         WHERE name = ?;
     """
 
-RETRIEVE_ACCOUNT_BYCLASS = ("""
+RETRIEVE_ACCOUNT_BYCLASS = """
         SELECT * FROM account
         WHERE _class = ?;
     """
 
-RETRIEVE_ACCOUNT_BYEMAIL = ("""
+RETRIEVE_ACCOUNT_BYEMAIL = """
         SELECT * FROM account
         WHERE email = ?;
     """
 
-RETRIEVE_ACCOUNT_BYYEAR = ("""
+RETRIEVE_ACCOUNT_BYYEAR = """
         SELECT * FROM account
         WHERE year = ?;
     """
