@@ -99,3 +99,9 @@ def update_email(email, new_email):
     
 def update_year(email, new_year):
     execute_query(sql.UPDATE_ACCOUNT_YEAR, [new_year, email])
+
+def check_email(email):
+    if retrieve_byemail(email) == []:
+        return False
+    else:
+        return True
