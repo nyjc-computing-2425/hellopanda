@@ -4,7 +4,7 @@ import secrets
 from backend.__init__ import acc_type
 
 app = Flask(__name__)
-app.secret_key = secrets.token_hex()
+
 
 @app.route('/') # Sprint 2 / MVP
 def index(): 
@@ -13,17 +13,12 @@ def index():
 
 @app.route('/student') # Sprint 2 / MVP
 def student_page():
-     # TODO: 
-    # 1. Get function from backend to get all events
-    # 2. Pass this data to render template
-     # (Optional) Create placeholder data on our end and pass it to render_template for testing
-    
-    return render_template('pages/student/student.html')
+    return render_template('student.html')
     
 
 @app.route('/student/event_details')
 def student_event_details_page():
-   return render_template("pages/studenteventdetails/studenteventdetails.html")
+    return render_template("studenteventdetails.html")
     
 
 @app.route('/login', method = ["GET", "POST"]) # Sprint 2 / MVP
