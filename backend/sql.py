@@ -7,7 +7,7 @@ CREATE_TABLE_ACCOUNT = """
         CREATE TABLE IF NOT EXISTS "account" (
             "email" TEXT NOT NULL,
             "salt" TEXT NOT NULL,
-            "password" INTEGER NOT NULL,
+            "password" TEXT NOT NULL,
             "_type" TEXT NOT NULL,
             "name" TEXT NOT NULL,
             "_class" INTEGER,

@@ -5,7 +5,7 @@
 #    from backend import account
 #    from backend import event
 
-from . import account, event, sql
+from . import account, event, sql, validate
 
 # The below usage will be deprecated in Sprint 4
 from .account import *
@@ -21,4 +21,4 @@ if __name__ == "__main__":
     print(acc_type("john@gmail.com"))
 
     create_event_table()
-    store_event_data(1,)
+    store_event_data(1, )
