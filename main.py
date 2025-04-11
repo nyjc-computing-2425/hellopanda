@@ -1,5 +1,8 @@
-from flask import Flask, abort, redirect, render_template, request, session
 import secrets
+
+from flask import Flask, abort, redirect, render_template, request, session
+
+
 # from validate import authenticate
 from backend.__init__ import acc_type
 
@@ -15,7 +18,9 @@ def index():
 def student_page():
     return render_template('/pages/student/student.html', events= [{"id":"blm day", "topic":"gimme fried chicken"},
                                                                    {"id":"reverse blm day", "topic":"steal my fried chicken"}])
-    
+@app.route('/student/event_details')
+def student_details_page():
+    return render_template('/pages/studenteventdetails/studenteventdetails.html')
 
 @app.route('/login', methods = ["GET", "POST"]) # Sprint 2 / MVP
 def login_page():
