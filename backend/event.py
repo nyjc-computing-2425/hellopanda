@@ -76,3 +76,13 @@ def retrieve_current_event():
     return lst
 
 
+def retrieve_upcoming_event():
+    x = str(datetime.datetime.now())
+    x = x[:19]
+
+    return execute_query("""
+        SELECT *
+        FROM event
+        WHERE (start_datetime>x)
+"""    )
+
