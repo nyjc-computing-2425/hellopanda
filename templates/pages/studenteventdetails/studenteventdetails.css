@@ -1,15 +1,20 @@
+#event-div {
+    margin: auto;
+}
+
 #details {
     margin: auto;
     margin-top: 15px;
     padding: 5px;
     border: solid 3px black;
+    border-radius: 10px;
     width: 50%;
     height: 430px;
 }
 
 #detail-table {
     height: 100%;
-    margin-left: 8px
+    margin-left: 8px;
 }
 
 td {

@@ -18,9 +18,19 @@ def index():
 def student_page():
     return render_template('/pages/student/student.html', events= [{"id":"blm day", "topic":"gimme fried chicken"},
                                                                    {"id":"reverse blm day", "topic":"steal my fried chicken"}])
-@app.route('/student/event_details')
+@app.route('/student/event_details', methods = ["GET", "POST"])
 def student_details_page():
-    return render_template('/pages/studenteventdetails/studenteventdetails.html')
+    if request.method == "GET":
+        return render_template('/pages/studenteventdetails/studenteventdetails.html')
+    elif request.method == "POST":
+        if "signup" in request.form:
+            action = request.form["signup"]
+            return render_template('/pages/studenteventdetails/studenteventdetails.html', misc_msg = "signed up")
+        if "unregister" in request.form:
+            action = request.form["unregister"]
+            return render_template('/pages/studenteventdetails/studenteventdetails.html', misc_msg="unregistered")
+        
+            
 
 @app.route('/login', methods = ["GET", "POST"]) # Sprint 2 / MVP
 def login_page():
