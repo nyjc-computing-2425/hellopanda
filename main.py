@@ -25,10 +25,10 @@ def student_details_page():
     elif request.method == "POST":
         if "signup" in request.form:
             action = request.form["signup"]
-            return render_template('/pages/studenteventdetails/studenteventdetails.html', misc_msg = "signed up")
+            return render_template('/pages/studenteventdetails/studenteventdetails.html', misc_msg = "Signed up sucessfully!")
         if "unregister" in request.form:
             action = request.form["unregister"]
-            return render_template('/pages/studenteventdetails/studenteventdetails.html', misc_msg="unregistered")
+            return render_template('/pages/studenteventdetails/studenteventdetails.html', misc_msg="Unregistered successfully!")
         
             
 

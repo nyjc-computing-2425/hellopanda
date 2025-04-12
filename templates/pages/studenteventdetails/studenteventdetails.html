@@ -33,9 +33,11 @@
             </div>
         </form>
         {% if misc_msg %} <!-- can change if condition as needed-->
-            <div id="misc_msg">
-                <h1>{{misc_msg}}</h1>
+        <div class="alert-wrapper">
+            <div class="alert">
+                <strong>{{misc_msg}}</strong>
             </div>
+        </div>
         {% endif %}
     </div>
 {% endblock %}
