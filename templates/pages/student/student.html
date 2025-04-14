@@ -1,0 +1,25 @@
+{% extends "template.html" %}
+
+{% block content %}
+    <div class="main-container-student">
+        
+        <div class="event-head-rounded-rectangle">
+            Live Events: 
+            
+        </div>
+
+
+        <div class="head-event-display">These are the events</div>
+        <div>
+            {% for event in events %}
+                <div class="event-wrapper">
+                    {% include "/components/event/event.html" %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block css %}
+    {% include"/pages/student/student.css" %}
+{% endblock %}
