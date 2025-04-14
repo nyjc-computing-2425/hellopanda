@@ -1,0 +1,37 @@
+{% extends "template.html" %}
+
+{% block css %}
+<style>
+  h1 {
+    font-size: 3rem;
+    text-align: center;
+  }
+
+  ul {
+      list-style-type: disc; /* Ensures bullet points */
+      padding-left: 20px; /* Keeps the left margin for bullets */
+      text-align: left; /* Aligns text to the left */
+      margin: 0 auto; /* Centers the list itself */
+      width: 50%; /* Control width to keep the margin consistent */
+    }
+
+    li {
+      margin-bottom: 10px; /* Adds space between items */
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="d-flex align-items-center justify-content-center gap-3 my-4">
+  <img src="static/assets/features_icon.png" alt="Left Icon" style="height: 40px;">
+  <h1 class="m-0">Features</h1>
+  <img src="static/assets/features_icon.png" alt="Left Icon" style="height: 40px;">
+</div>
+
+<ul>
+  <li>User-Friendly Interface: Simple and intuitive design for quick navigation.</li>
+  <li>Event Creation: Easily set up and customize school events, including dates, times, and descriptions.</li>
+  <li>RSVP Tracking: Track student and staff attendance with real-time updates.</li>
+  <li>Reporting & Analytics: View event data such as attendance trends and participant demographics.</li>
+</ul>
+{% endblock %}

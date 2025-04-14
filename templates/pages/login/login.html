@@ -1,0 +1,30 @@
+{% extends "template.html" %}
+{% block head %}
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+	<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+	<link href='https://fonts.googleapis.com/css?family=League Spartan' rel='stylesheet'>
+{% endblock %}
+{% block content %}
+	<form action = '/login' method="POST">
+	<div class="container">
+	<div class="label"><label for ='user-field'> USERNAME:</label></div>
+		<div class="input-box">
+			<i class="fas fa-user"></i>
+			<input id='user-field' type = 'text' name = 'username' value=''>
+		</div>
+	<div class="label"><label for = 'pass-field'> PASSWORD: </label></div>
+		<div class="input-box">
+			<i class="fas fa-lock"></i>
+			<input id='pass-field' type='password' name='password'  value=''>
+		</div>
+	<button type="submit">LOGIN</button>
+	</form>
+	{% if error_msg %}
+		<div><p style ="color:red;">{{error_msg}}</p></div>
+	{% endif %}
+	</div>
+{% endblock %}
+
+{% block css %}
+    {% include "/pages/login/login.css" %}
+{% endblock %}

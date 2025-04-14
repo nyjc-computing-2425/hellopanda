@@ -8,9 +8,14 @@
         {% block head %}
         {% endblock %}
 
+        <!-- Import the self made styles -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+        <style>
         {% block css %}
         <!-- This is where the CSS goes -->
         {% endblock %}
+        </style>
     </head>
     <body>
         <div class="main">
