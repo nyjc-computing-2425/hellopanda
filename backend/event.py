@@ -43,6 +43,10 @@ def store_event_data(id, start, end, topic, synopsis, venue) -> None:
     execute_query(sql.INSERT_INTO_EVENT,
         [id, start, end, topic, synopsis, venue])
 
+#Functions to retrieve data
+def retrieve_byname(name):
+    return execute_query(sql.RETRIEVE_EVENT_BYNAME,[name])
+
 #Functions to update event data
 def update_start(id, start):
     execute_query(sql.UPDATE_EVENT_START, [start, id])
@@ -60,27 +64,19 @@ def update_venue(id, venue):
     execute_query(sql.UPDATE_EVENT_VENUE, [venue, id])
 
 #Function to return list of all events
-def retrieve_event():
-        return execute_query(sql.RETRIEVE_EVENT)
+def retrieve_all_events():
+        return execute_query(sql.RETRIEVE_ALL_EVENTS)
 
 def retrieve_current_events():
     x = str(datetime.datetime.now())
     x = x[:19]
 
-    return execute_query("""
-        SELECT *
-        FROM event
-        WHERE (start_datetime<=? AND end_datetime>=?)
-    """,[x, x])
+    return execute_query(sql.RETRIEVE_CURRENT_EVENTS,[x, x])
 
 
 def retrieve_upcoming_events():
     x = str(datetime.datetime.now())
     x = x[:19]
 
-    return execute_query("""
-        SELECT *
-        FROM event
-        WHERE (start_datetime>?)
-    """,[x]   )
+    return execute_query(sql.RETRIEVE_UPCOMING_EVENTS,[x]   )
 

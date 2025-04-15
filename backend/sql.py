@@ -116,7 +116,25 @@ UPDATE_EVENT_VENUE = """UPDATE event
         SET venue = ?
         WHERE id = ?
     """
-RETRIEVE_EVENT = """
+RETRIEVE_ALL_EVENTS = """
         SELECT *
         FROM event;
+    """
+
+RETRIEVE_EVENT_BYNAME = """
+        SELECT *
+        FROM event
+        WHERE topic=?
+    """
+
+RETRIEVE_CURRENT_EVENTS = """
+        SELECT *
+        FROM event
+        WHERE (start_datetime<=? AND end_datetime>=?)
+    """
+
+RETRIEVE_UPCOMING_EVENTS = """
+        SELECT *
+        FROM event
+        WHERE (start_datetime>?)
     """
