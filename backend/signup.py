@@ -25,3 +25,10 @@ def get_signed_up_events(email):
         FROM signup
         WHERE email = ?
 """, [email])
+
+def add_student_to_event(email, event_id):
+    execute_query("""
+        INSERT INTO signup
+        VALUES (email,event_id)
+    """)
+        
