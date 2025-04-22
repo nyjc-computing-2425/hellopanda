@@ -30,5 +30,9 @@ def add_student_to_event(email, event_id):
     execute_query("""
         INSERT INTO signup
         VALUES (email,event_id)
-    """)
-        
+        """)
+def remove_student_from_event(email, event_id):
+    execute_query("""
+        DELETE FROM signup 
+        WHERE email = ? AND event_id = ?
+        """)
