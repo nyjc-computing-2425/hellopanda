@@ -17,3 +17,11 @@ def delete_signup_table():
     execute_query("""
         DROP TABLE IF EXISTS signup;
     """)
+
+#retrieve events signed up
+def get_signed_up_events(email):
+    return execute_query("""
+        SELECT *
+        FROM signup
+        WHERE email = ?
+""", [email])
