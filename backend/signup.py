@@ -20,12 +20,12 @@ def delete_signup_table():
 
 #retrieve events signed up
 def get_signed_up_events(email):
-    dict = execute_query("""
+    dic = execute_query("""
         SELECT *
         FROM signup
         WHERE email = ?
 """, [email])
-    return [row["event_id"] for row in dict]
+    return [row["event_id"] for row in dic]
 
 def add_student_to_event(email, event_id):
     execute_query("""
@@ -40,7 +40,8 @@ def remove_student_from_event(email, event_id):
         """, [email, event_id])
 
 def get_event_participants(event_id):
-    execute_query("""
+    dic = execute_query("""
         SELECT * FROM signup 
-        WHERE event_id;
+        WHERE event_id = ?;
         """, [event_id])
+    return [row["email"] for row in dic]
