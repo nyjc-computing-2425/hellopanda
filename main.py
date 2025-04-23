@@ -42,7 +42,9 @@ def login_page():
         else:
             return render_template("pages/login/login.html", error_msg = "Login Unsuccessful")
 
-        
+@app.route('/register')
+def register():
+    return render_template("/pages/register/register.html")
 
 
 @app.route('/organiser')

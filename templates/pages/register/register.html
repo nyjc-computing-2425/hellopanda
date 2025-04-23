@@ -6,6 +6,12 @@
 {% endblock %}
 {% block content %}
 	<form action = '/login' method="POST">
+	<div class="role-select">
+		<h1>CHOOSE YOUR ROLE</h1>
+		<button type="button" class="role-button" onclick="selectRole('participant')">Participant</button>
+		<button type="button" class="role-button" onclick="selectRole('organiser')">Organiser</button>
+		<input type="hidden" name="role" id="role-field" value="">
+	</div>
 	<div class="container">
     <div class="label"><label for ='name-field'> NAME:</label></div>
 		<div class="input-box">
