@@ -18,6 +18,7 @@ def index():
 def student_page():
     return render_template('/pages/student/student.html', events= [{"id":"blm day", "topic":"gimme fried chicken"},
                                                                    {"id":"reverse blm day", "topic":"steal my fried chicken"}])
+
 @app.route('/student/event_details', methods = ["GET", "POST"])
 def student_details_page():
     if request.method == "GET":
@@ -41,8 +42,6 @@ def student_details_page():
                                                                                              "location": "KFC",
                                                                                              "description": "steal as much fried chicken as possible",
                                                                                              "slots": "100"}) #temp
-        
-            
 
 @app.route('/login', methods = ["GET", "POST"]) # Sprint 2 / MVP
 def login_page():
@@ -74,7 +73,8 @@ def login_page():
 
 @app.route('/organiser')
 def organiser_page():
-    return "organiser home page"
+    return render_template("pages/organiser/organiser.html", events=[{"id":"ny fiesta", "topic":"throw pch into the water"},
+                                                                     {"id":"sigma day", "topic":"chicken jockey"}])
 
 
 @app.route('/organiser/events')
@@ -105,6 +105,10 @@ def privacy_page():
 @app.route("/terms")
 def terms_page():
     return render_template("pages/terms/terms.html")
+
+@app.route("/flag.txt")
+def flag():
+    return "CTFSG{P4NG_P4NG_TH4_G0aT}"
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5001, debug=True)
