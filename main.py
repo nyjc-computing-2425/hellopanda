@@ -21,14 +21,26 @@ def student_page():
 @app.route('/student/event_details', methods = ["GET", "POST"])
 def student_details_page():
     if request.method == "GET":
-        return render_template('/pages/studenteventdetails/studenteventdetails.html')
+        return render_template('/pages/studenteventdetails/studenteventdetails.html', event={"name": "reverse blm day",
+                                                                                             "date": "4 July 2025",
+                                                                                             "location": "KFC",
+                                                                                             "description": "steal as much fried chicken as possible",
+                                                                                             "slots": "100"})
     elif request.method == "POST":
         if "signup" in request.form:
             action = request.form["signup"]
-            return render_template('/pages/studenteventdetails/studenteventdetails.html', misc_msg = "Signed up sucessfully!")
+            return render_template('/pages/studenteventdetails/studenteventdetails.html', misc_msg = "Signed up sucessfully!", event={"name": "reverse blm day",
+                                                                                             "date": "4 July 2025",
+                                                                                             "location": "KFC",
+                                                                                             "description": "steal as much fried chicken as possible",
+                                                                                             "slots": "100"}) #temp
         if "unregister" in request.form:
             action = request.form["unregister"]
-            return render_template('/pages/studenteventdetails/studenteventdetails.html', misc_msg="Unregistered successfully!")
+            return render_template('/pages/studenteventdetails/studenteventdetails.html', misc_msg="Unregistered successfully!", event={"name": "reverse blm day",
+                                                                                             "date": "4 July 2025",
+                                                                                             "location": "KFC",
+                                                                                             "description": "steal as much fried chicken as possible",
+                                                                                             "slots": "100"}) #temp
         
             
 
