@@ -4,7 +4,7 @@ from flask import Flask, abort, redirect, render_template, request, session
 
 
 # from validate import authenticate
-from backend.__init__ import acc_type
+from backend.__init__ import acc_type, validate
 
 app = Flask(__name__)
 
@@ -28,9 +28,9 @@ def login_page():
         pw = request.form["password"]
 
 
-        authenticated = False
+        # authenticated = False
         # authenticate() is not built yet
-        # authenticated = authenticate(user, pw)
+        authenticated = validate.authenticate(user, pw)
         account = acc_type(user)
         if authenticated:
             session["user_name"] = user
@@ -48,6 +48,14 @@ def login_page():
 def register():
     return render_template("/pages/register/register.html")
 
+@app.route('/organiser/create_event', methods = ["GET", "POST"]) # Sprint 2 / MVP
+def organiser_create_event_page():
+    if request.method == "GET":
+        return render_template('pages/create_event/create_event.html')
+    else:
+        
+        return render_template('pages/login/login.html')
+        
 
 @app.route('/organiser')
 def organiser_page():
@@ -60,9 +68,6 @@ def organiser_events_page():
     return "organiser events page"
 
 
-@app.route('/organiser/create_event')
-def organiser_create_event_page():
-    return "organiser create event page" 
 
 @app.route('/about')
 def about_page():
