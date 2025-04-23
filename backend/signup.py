@@ -38,3 +38,9 @@ def remove_student_from_event(email, event_id):
         DELETE FROM signup 
         WHERE email = ? AND event_id = ?
         """, [email, event_id])
+
+def get_event_participants(event_id):
+    execute_query("""
+        SELECT * FROM signup 
+        WHERE event_id;
+        """, [event_id])
