@@ -27,7 +27,7 @@ def store_account_data(email, salt, password, _type, name, _class, graduation_ye
     salt: str
         The salt for the password
 
-    password: int
+    password: str
         The hashed password
 
     _type: str

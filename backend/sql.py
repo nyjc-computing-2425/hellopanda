@@ -7,7 +7,7 @@ CREATE_TABLE_ACCOUNT = """
         CREATE TABLE IF NOT EXISTS "account" (
             "email" TEXT NOT NULL,
             "salt" TEXT NOT NULL,
-            "password" INTEGER NOT NULL,
+            "password" TEXT NOT NULL,
             "_type" TEXT NOT NULL,
             "name" TEXT NOT NULL,
             "_class" INTEGER,
@@ -72,14 +72,14 @@ UPDATE_ACCOUNT_YEAR = """
 
 #EVENTS
 CREATE_TABLE_EVENTS = """
-        CREATE TABLE IF NOT EXISTS "account" (
-            "id" INTEGER NOT NULL,
+        CREATE TABLE IF NOT EXISTS "event" (
+            "event_id" INTEGER NOT NULL,
             "start_datetime" TEXT NOT NULL,
             "end_datetime" TEXT NOT NULL,
             "topic" TEXT NOT NULL,
             "synopsis" TEXT NOT NULL,
             "venue" TEXT,
-            PRIMARY KEY("id")
+            PRIMARY KEY("event_id")
         );
     """
 
@@ -88,35 +88,53 @@ DELETE_TABLE_EVENT = """
     """
 
 INSERT_INTO_EVENT = """
-        INSERT INTO event (id, start_datetime, end_datetime, topic, synopsis, venue)
+        INSERT INTO event (event_id, start_datetime, end_datetime, topic, synopsis, venue)
         VALUES (?, ?, ?, ?, ?, ?)
     """
 
 UPDATE_EVENT_START = """UPDATE event 
         SET start_datetime = ?
-        WHERE id = ?
+        WHERE event_id = ?
     """
 
 UPDATE_EVENT_END = """UPDATE event 
         SET end_datetime = ?
-        WHERE id = ?
+        WHERE event_id = ?
     """
 
 UPDATE_EVENT_TOPIC = """UPDATE event 
         SET topic = ?
-        WHERE id = ?
+        WHERE event_id = ?
     """
 
 UPDATE_EVENT_SYNOPSIS = """UPDATE event 
         SET synopsis = ?
-        WHERE id = ?
+        WHERE event_id = ?
     """
 
 UPDATE_EVENT_VENUE = """UPDATE event 
         SET venue = ?
-        WHERE id = ?
+        WHERE ievent_idd = ?
     """
-RETRIEVE_EVENT = """
+RETRIEVE_ALL_EVENTS = """
         SELECT *
         FROM event;
+    """
+
+RETRIEVE_EVENT_BYNAME = """
+        SELECT *
+        FROM event
+        WHERE topic=?
+    """
+
+RETRIEVE_CURRENT_EVENTS = """
+        SELECT *
+        FROM event
+        WHERE (start_datetime<=? AND end_datetime>=?)
+    """
+
+RETRIEVE_UPCOMING_EVENTS = """
+        SELECT *
+        FROM event
+        WHERE (start_datetime>?)
     """
