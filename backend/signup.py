@@ -33,4 +33,3 @@ def mark_attendance(attendance, email, event_id):
 def is_present(email, event_id):
     results = execute_query(sql.IS_PRESENT, [email, event_id])
     return bool(results[0]["attendance"])
-
