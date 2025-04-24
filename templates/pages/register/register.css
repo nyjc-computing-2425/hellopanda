@@ -40,7 +40,11 @@
 	
 	.reg-button{
 		margin-top: 15px;
+<<<<<<< Updated upstream
 		width: 15%;
+=======
+		width: 20%;
+>>>>>>> Stashed changes
 		font-size: 25px;
 		background: red;
 		font-family: league spartan;
