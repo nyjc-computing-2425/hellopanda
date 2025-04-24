@@ -20,20 +20,20 @@ def initialise():
 initialise()
 
 ###############ACCOUNT######################
-# print("Account")
-# account.update_class("notjohn@gmail.com", 2426)
-# account.update_year("notjohn@gmail.com", 1000)
-# print(account.retrieve_byclass(2426))
-# print(account.acc_type("john@gmail.com"))
+print("Account")
+account.update_class("notjohn@gmail.com", 2426)
+account.update_year("notjohn@gmail.com", 1000)
+print(account.retrieve_byclass(2426))
+print(account.acc_type("john@gmail.com"))
 
 ###################EVENT######################
-# print("Event")
-# event.store_event_data(1, "2025-06-12 09:00:00", "2025-06-13 09:00:00", "Bad event", "hi  imagine events", "Home")
-# event.store_event_data(2, "2025-04-10 09:00:00", "2025-06-13 09:00:00", "Another event", "HAHA!", "Probably in sch")
-# print(event.retrieve_all_events())
-# print("Upcoming: ",event.retrieve_upcoming_events())
-# print("Current: ",event.retrieve_current_events())
-# print(event.retrieve_byname("bad event"))
+print("Event")
+event.store_event_data(1, "2025-06-12 09:00:00", "2025-06-13 09:00:00", "Bad event", "hi  imagine events", "Home")
+event.store_event_data(2, "2025-04-10 09:00:00", "2025-06-13 09:00:00", "Another event", "HAHA!", "Probably in sch")
+print(event.retrieve_all_events())
+print("Upcoming: ",event.retrieve_upcoming_events())
+print("Current: ",event.retrieve_current_events())
+print(event.retrieve_byname("bad event"))
 
 #################SIGNUP#########################
 # print("Signup")
