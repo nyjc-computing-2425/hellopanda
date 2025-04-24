@@ -4,34 +4,61 @@
 {% endblock %}
 
 {% block content %}
-    <div id="event-div">
-        <div id="details">
-            <table id="detail-table">
-                <tr class="detail-table-row">
-                    <td>Event Name: <input type="text" name="event_name"/></td> 
-                </tr>
-                <tr class="detail-table-row">
-                    <td>Date: </td> 
-                </tr>
-                <tr class="detail-table-row">
-                    <td>Location: </td> 
-                </tr>
-                <tr class="detail-table-row">
-                    <td>Description: </td> 
-                </tr>
-                <tr class="detail-table-row">
-                    <td>Number of slots:</td> 
-                </tr>
-            </table>
+    <div id="form-header">
+        <h1>Event Creation Form</h1>
+    </div>
+    <div id="all-wrapper">
+        <div id="the-form">
+            <form id="actual-form">
+                <div id="form-event-name">
+                    <label for="eventname">Event Name</label>
+                    <input name="eventname" type="text"> 
+                </div>
+                <div id="form-datetime">
+                    <div id="date1">
+                        <label for="startdate">Start Date</label>
+                        <input name="startdate" type="text">
+                    </div>
+
+                    <div id="time1">
+                        <label for="starttime">Start Time</label>
+                        <input name="starttime" type="text">
+                    </div>
+
+                    <div id="date2">
+                        <label for="enddate">End Date</label>
+                        <input name="enddate" type="text">
+                    </div>
+
+                    <div id="time2">
+                        <label for="endtime">End Time</label>
+                        <input name="endtime" type="text">
+                    </div>
+                </div>
+                <div id="form-signupdeadline">
+                    <div id="signupdeadline">
+                        <label>Sign up deadline</label>
+                        <input type="text">
+                    </div>
+
+                    <div id="signupdeadlinetime">
+                        <label>Sign up deadline time</label>
+                        <input type="text">
+                    </div>
+                </div>
+                <div id="form-event-desc">
+                    <label for="event-desc">Event Description</label>
+                    <input name="event-desc" type="text"> 
+                </div>
+                <div id="form-event-max-slots">
+                    <label for="event-max-slots">Max No. of Participants</label>
+                    <input name="event-max-slots" type="text"> 
+                </div>
+                <div id="create-button-wrapper">
+                    <button id="create-button">Create</button>
+                </div>
+            </form>
         </div>
-        <form id="buttons-div" method="POST">
-            <div>
-                <button id="signup-button" name="signup" type="submit" value="signup">SAVE</button>
-            </div>
-            <div>
-                <button id="unregister-button" name="unregister" type="submit" value="unregister">CANCEL</button>
-            </div>
-        </form>
         {% if misc_msg %} <!-- can change if condition as needed-->
         <div class="alert-wrapper">
             <div class="alert">
