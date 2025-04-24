@@ -88,21 +88,17 @@
                 </li>
               {% endif %}
 
-              <li class="nav-item">
-                <a id="loginbutton" class="nav-item" href="/login">Login </a>
-              </li>
-
-              {% if request.path == "/" %}
-              <li class="nav-item">
-                <a id="registerbutton" class="nav-link" href="/register">Register </a>
-              </li> 
-              {% else %}
-              <li class="nav-item invisible">
-                <a id="registerbutton" class="nav-link" href="/register">Mugger </a>
-              </li>
+              {% if not logined %}
+                <li class="nav-item">
+                  <a id="loginbutton" class="nav-item" href="/login">Login </a>
+                </li>
               {% endif %}
               
-
+              {% if not logined %}
+                <li class="nav-item">
+                  <a id="registerbutton" class="nav-link" href="/register">Register </a>
+                </li> 
+              {% endif %}
           </ul>             
             </nav>
     </div>
