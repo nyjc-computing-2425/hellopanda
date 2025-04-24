@@ -1,0 +1,88 @@
+<style>
+  #loginbutton {
+    font-weight: bold;
+    text-align: center;
+    margin: auto;
+    width: 100px;
+    padding: 10px;
+    background-color: #00000C;
+    color: white;
+    text-decoration: none;
+    border: 2px solid grey;
+    margin-left: 20px; /* Add margin for spacing */
+  }
+
+  #registerbutton {
+    font-weight: bold;
+    text-align: center;
+    margin: auto;
+    width: 100px;
+    padding: 10px;
+    background-color: #00000C;
+    color: white;
+    text-decoration: none;
+    border: 2px solid grey;
+    margin-left: 20px; /* Add margin for spacing */
+  }
+
+
+  .nav-link {
+    font-weight: bold;
+    color: white;
+    padding: 10px 20px; /* Add padding for better spacing */
+    text-align: center;
+    text-decoration: none; /* Remove underline from links */
+  }
+  
+  .navbar-nav {
+    display: flex;
+    justify-content: flex-end; /* Align items to the right */
+    width: 100%;
+  }
+  
+  .navbar-nav .nav-item {
+    list-style: none;
+    display: inline-block; /* Keep each item inline */
+  }
+  
+  .navbar-brand {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Align the logo to the left */
+    flex-grow: 1; /* Allow logo to take space on the left */
+  }
+  
+  </style>
+  
+  <div class="bg-dark mb-2">
+      <nav class="navbar navbar-dark navbar-expand-lg m-auto" style="max-width: 800px; color: white; justify-content: space-between">
+          <div class="navbar-brand">
+              <img width="75" height="75" src="../../../static/assets/Hello_Panda.png" alt="Hello Panda">
+          </div>
+  
+          <ul class="navbar-nav">
+              <li class="nav-item active">
+                  <a class="nav-link" href="/">Home</a>
+              </li>
+  
+              <li class="nav-item">
+                  <a class="nav-link" href="/about">About</a>
+              </li>
+  
+              <li class="nav-item">
+                  <a class="nav-link" href="/features">Features</a>
+              </li>
+  
+              <li class="nav-item">
+                  <a class="nav-link" href="/contact">Contact Us</a>
+              </li>
+
+              <li class="nav-item">
+                <a id="registerbutton" class="nav-link" href="/register">Register </a>
+              </li> 
+              <li class="nav-item">
+                <a id="loginbutton" class="nav-item" href="/login">Login </a>
+              </li>
+          </ul>             
+            </nav>
+    </div>

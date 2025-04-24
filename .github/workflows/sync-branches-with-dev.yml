@@ -1,4 +1,4 @@
-name: Sync Dev to Other Branches
+name: Sync Dev to Other Branches (Safe Merge)
 
 on:
   push:
@@ -22,26 +22,29 @@ jobs:
           git config user.name "GitHub Action"
           git config user.email "action@github.com"
 
-      - name: Sync Source Branch to Other Branches
+      - name: Safely Merge Dev into Other Branches
         run: |
-          SOURCE_BRANCH="${GITHUB_REF##*/}"
+          SOURCE_BRANCH="dev"
           TARGETS=("qa" "frontend" "backend")
 
+          git fetch origin
+
           for TARGET in "${TARGETS[@]}"; do
-            # Skip syncing if the source is the same as target
             if [ "$SOURCE_BRANCH" == "$TARGET" ]; then
               echo "Skipping $TARGET (same as source)"
               continue
             fi
 
+            echo "Merging $SOURCE_BRANCH into $TARGET"
+
+            # Fetch and checkout the target branch
+            git fetch origin $TARGET:$TARGET || true
             git checkout $TARGET
-            git pull origin $TARGET || echo "No changes to pull for $TARGET"
-            git reset --hard origin/$SOURCE_BRANCH
-            git merge --squash origin/$SOURCE_BRANCH || echo "No changes to merge for $TARGET"
-            if [ -n "$(git status --porcelain)" ]; then
-              git commit -m "Squash merge changes from $SOURCE_BRANCH into $TARGET"
-              git push origin $TARGET || echo "Failed to push $TARGET branch"
-            fi
-            git reset --hard $SOURCE_BRANCH
-            git push origin $TARGET --force || echo "Failed to force push $TARGET branch"
+            git pull origin $TARGET
+
+            # Merge dev into target branch
+            git merge origin/$SOURCE_BRANCH --no-ff -m "Merge $SOURCE_BRANCH into $TARGET"
+
+            # Push the merged branch
+            git push origin $TARGET
           done
