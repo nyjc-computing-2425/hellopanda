@@ -28,8 +28,4 @@ def get_event_participants(event_id):
     return [row["email"] for row in dic]
 
 def mark_attendance(email, event_id):
-    execute_query("""
-        UPDATE signup SET "attendance" = 1
-        WHERE email = ? AND event_id = ?
-        
-    """, [email, event_id])
+    execute_query(sql.MARK_ATTENDENCE,[email, event_id])

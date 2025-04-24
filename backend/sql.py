@@ -171,3 +171,8 @@ GET_EVENT_PARTICIPATION = """
         SELECT * FROM signup 
         WHERE event_id = ?;
     """
+
+MARK_ATTENDENCE = """
+        UPDATE signup SET "attendance" = 1
+        WHERE email = ? AND event_id = ?       
+    """
