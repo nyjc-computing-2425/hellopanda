@@ -143,7 +143,7 @@ CREATE_TABLE_SIGNUP = """
         CREATE TABLE IF NOT EXISTS "signup" (
             "email" TEXT NOT NULL,
             "event_id" INTEGER NOT NULL,
-            "attendance" BOOLEAN NOT NULL
+            "attendance" INTEGER DEFAULT 0
         );
     """
 
@@ -158,8 +158,8 @@ GET_SIGN_UP_EVENT = """
     """
 
 ADD_STUDENT_TO_EVENT = """
-        INSERT INTO signup
-        VALUES (?, ?, ?)
+        INSERT INTO signup (email, event_id)
+        VALUES (?, ?) 
     """
 
 REMOVE_STUDENT_FROM_EVENT = """
@@ -170,4 +170,15 @@ REMOVE_STUDENT_FROM_EVENT = """
 GET_EVENT_PARTICIPATION = """
         SELECT * FROM signup 
         WHERE event_id = ?;
+    """
+
+MARK_ATTENDENCE = """
+        UPDATE signup SET "attendance" = ?
+        WHERE email = ? AND event_id = ?    
+    """
+
+IS_PRESENT ="""
+        SELECT "attendance" FROM signup
+        WHERE email = ? AND event_id = ?
+        
     """
