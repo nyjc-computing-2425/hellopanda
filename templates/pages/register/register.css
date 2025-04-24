@@ -5,8 +5,8 @@
 	width:100%;
 	height:100vh;
 	flex-direction:column;
-	gap:10px;
-    margin-top: -90px;
+	gap: 10px;
+    margin-top: -140px;
 	}
 
 	.input-box{
@@ -38,9 +38,9 @@
 		font-family: montserrat;
 	}
 	
-	button{
+	.reg-button{
 		margin-top: 15px;
-		width: 10%;
+		width: 15%;
 		font-size: 25px;
 		background: red;
 		font-family: league spartan;
@@ -49,24 +49,38 @@
 		border-style: none;
 	}
 	
-	button:hover{
+	.reg-button:hover{
 		box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 	}
 
-	.role-select{
+	.role-select {
 		display: flex;
-		gap: 10px;
-		justify-content: center;
+		flex-direction: column;
 		align-items: center;
+		gap: 5px;
+		margin-bottom: 20px;
 	}
 
 	.role-button{
-		margin-top: 15px;
-		width: 10%;
+		margin-top: 10px;
+		width: 50%;
 		font-size: 25px;
 		background: grey;
 		font-family: league spartan;
 		color: white;
 		font-weight: 900;
 		border-style: none;
+		
+	}
+
+	.role-buttons {
+		display: flex;
+		gap: 10px;
+		justify-content: center;
+	}
+
+	.role-button.selected {
+		background-color: black;
+		color: white;
+		border-color: #333;
 	}

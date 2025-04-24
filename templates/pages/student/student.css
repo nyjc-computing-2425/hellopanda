@@ -1,0 +1,12 @@
+#view-event-button-wrapper {
+    width :70%;
+}
+
+#view-event-button {
+    border: none;
+    border-radius: 5px;
+    width: 70%;
+    padding: 3px;
+    margin-bottom: 2px;
+    font-size: 17px;
+}
