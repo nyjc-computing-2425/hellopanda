@@ -138,3 +138,36 @@ RETRIEVE_UPCOMING_EVENTS = """
         FROM event
         WHERE (start_datetime>?)
     """
+
+CREATE_TABLE_SIGNUP = """
+        CREATE TABLE IF NOT EXISTS "signup" (
+            "email" TEXT NOT NULL,
+            "event_id" INTEGER NOT NULL,
+            "attendance" BOOLEAN NOT NULL
+        );
+    """
+
+DELETE_SIGNUP_TABLE = """
+        DROP TABLE IF EXISTS signup;
+    """
+
+GET_SIGN_UP_EVENT = """
+        SELECT *
+        FROM signup
+        WHERE email = ?
+    """
+
+ADD_STUDENT_TO_EVENT = """
+        INSERT INTO signup
+        VALUES (?, ?, ?)
+    """
+
+REMOVE_STUDENT_FROM_EVENT = """
+        DELETE FROM signup 
+        WHERE email = ? AND event_id = ?
+    """
+
+GET_EVENT_PARTICIPATION = """
+        SELECT * FROM signup 
+        WHERE event_id = ?;
+    """
