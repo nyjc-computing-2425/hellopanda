@@ -41,6 +41,7 @@
   }
   
   .navbar-nav .nav-item {
+
     list-style: none;
     display: inline-block; /* Keep each item inline */
   }
@@ -53,9 +54,9 @@
   }
   
   </style>
-  
+  <
   <div class="bg-dark mb-2">
-      <nav class="navbar navbar-dark navbar-expand-lg m-auto" style="max-width: 800px; color: white; justify-content: space-between">
+      <nav class="navbar navbar-dark navbar-expand m-auto" style="max-width: 800px; color: white; justify-content: space-between">
           <div class="navbar-brand">
               <img width="75" height="75" src="../../../static/assets/Hello_Panda.png" alt="Hello Panda">
           </div>
@@ -78,11 +79,20 @@
               </li>
 
               <li class="nav-item">
-                <a id="registerbutton" class="nav-link" href="/register">Register </a>
-              </li> 
-              <li class="nav-item">
                 <a id="loginbutton" class="nav-item" href="/login">Login </a>
               </li>
+
+              {% if request.path == "/" %}
+              <li class="nav-item">
+                <a id="registerbutton" class="nav-link" href="/register">Register </a>
+              </li> 
+              {% else %}
+              <li class="nav-item invisible">
+                <a id="registerbutton" class="nav-link" href="/register">Mugger </a>
+              </li>
+              {% endif %}
+              
+
           </ul>             
             </nav>
     </div>
