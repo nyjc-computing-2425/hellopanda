@@ -1,7 +1,7 @@
 import sqlite3
 
 ####################################QUERY##################################
-def execute_query(query, params=None) -> list:
+def execute_query(query, params=None) -> list|None:
     """
     Executes a SQL query. Automatically returns results for SELECT queries,
     and commits changes for INSERT/UPDATE/DELETE/DDL statements.
@@ -25,6 +25,5 @@ def execute_query(query, params=None) -> list:
     finally:
         conn.commit()
         conn.close()
-        return []
 
 
