@@ -9,6 +9,7 @@ def create_signup_table() -> None:
         CREATE TABLE IF NOT EXISTS "signup" (
             "email" TEXT NOT NULL,
             "event_id" INTEGER NOT NULL
+            "attendance" BOOLEAN NOT NULL
         );
     """)
 
