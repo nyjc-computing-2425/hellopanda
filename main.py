@@ -92,8 +92,7 @@ def organiser_page():
 
 @app.route('/organiser/events')
 def organiser_events_page():
-    return "organiser events page"
-
+    return render_template('/pages/organiser-events/organiser-events.html', event = None)
 
 
 @app.route('/about')

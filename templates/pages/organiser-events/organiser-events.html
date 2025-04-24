@@ -1,0 +1,55 @@
+{% extends "template.html" %}
+{% block css %}
+    {% include "/pages/organiser-events/organiser-events.css" %}
+{% endblock %}
+{% block content %}
+<div id="container">
+    <div id="event-div">
+        <div id="details">
+            <table id="detail-table">
+                <tr class="detail-table-row">
+                    <td>Event Name: {{event.name}}</td> <!-- add jinja variable here -->
+                </tr>
+                <tr class="detail-table-row">
+                    <td>Date: {{event.date}}</td> <!-- add jinja variable here -->
+                </tr>
+                <tr class="detail-table-row">
+                    <td>Location: {{event.location}}</td> <!-- add jinja variable here -->
+                </tr>
+                <tr class="detail-table-row">
+                    <td>Description: {{event.description}}</td> <!-- add jinja variable here -->
+                </tr>
+                <tr class="detail-table-row">
+                    <td>Number of slots: {{event.slots}}</td> <!-- add jinja variable here -->
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div id="student-detail-div">
+        <div id="student-details">
+        <form action="/organiser/events" method="POST">
+        <table border="1" style="width: 100;">
+        <tr>
+            <th>Participants</th>
+            <th>Class</th>
+            <th>Checkbox</th>
+        </tr>
+        {%for student in student_data%}
+        <tr>
+        <td>{{student.name}}</td>
+        <td>{{student.class}}</td>
+        <td>
+            <input type="checkbox"
+                name="attendance"
+            value="{{ student.email }}"
+            {% if student.attend == 1 %}checked{% endif %}>
+        </td>
+        </tr>
+        {%endfor%}
+        </table>
+        <button type="submit" id="submit-button">Submit Attendance</button>
+        </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
