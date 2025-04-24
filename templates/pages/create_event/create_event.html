@@ -1,6 +1,6 @@
 {% extends "template.html" %}
 {% block css %}
-    {% include "/pages/studenteventdetails/studenteventdetails.css" %}
+    {% include "/pages/create_event/create_event.css" %}
 {% endblock %}
 
 {% block content %}
@@ -8,28 +8,28 @@
         <div id="details">
             <table id="detail-table">
                 <tr class="detail-table-row">
-                    <td>Event Name: {{event.name}}</td> <!-- add jinja variable here -->
+                    <td>Event Name: <input type="text" name="event_name"/></td> 
                 </tr>
                 <tr class="detail-table-row">
-                    <td>Date: {{event.date}}</td> <!-- add jinja variable here -->
+                    <td>Date: </td> 
                 </tr>
                 <tr class="detail-table-row">
-                    <td>Location: {{event.location}}</td> <!-- add jinja variable here -->
+                    <td>Location: </td> 
                 </tr>
                 <tr class="detail-table-row">
-                    <td>Description: {{event.description}}</td> <!-- add jinja variable here -->
+                    <td>Description: </td> 
                 </tr>
                 <tr class="detail-table-row">
-                    <td>Number of slots: {{event.slots}}</td> <!-- add jinja variable here -->
+                    <td>Number of slots:</td> 
                 </tr>
             </table>
         </div>
         <form id="buttons-div" method="POST">
             <div>
-                <button id="signup-button" name="signup" type="submit" value="signup">SIGN UP</button>
+                <button id="signup-button" name="signup" type="submit" value="signup">SAVE</button>
             </div>
             <div>
-                <button id="unregister-button" name="unregister" type="submit" value="unregister">UNREGISTER</button>
+                <button id="unregister-button" name="unregister" type="submit" value="unregister">CANCEL</button>
             </div>
         </form>
         {% if misc_msg %} <!-- can change if condition as needed-->
