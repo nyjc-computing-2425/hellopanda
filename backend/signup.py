@@ -6,7 +6,7 @@ def create_signup_table() -> None:
     """
     Creates the account table
     """
-    execute_query(sql.CREATE_TABLE_SIGNUP")
+    execute_query(sql.CREATE_TABLE_SIGNUP)
 
 #Delete account table
 def delete_signup_table():
