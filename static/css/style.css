@@ -26,6 +26,7 @@
     text-align: center;
     font-family: Arial, sans-serif;
     font-size: 20px; 
+    font-weight: bold;
     margin-bottom: 20px;
 }
 
@@ -62,4 +63,5 @@
     font-weight: bold;
     margin: 20px 0 20px 0px; /* 20px margin from the top, right, and bottom, and 20px from the left */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a slight shadow */
+    
 }

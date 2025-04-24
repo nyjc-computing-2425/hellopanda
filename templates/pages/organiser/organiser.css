@@ -1,0 +1,15 @@
+.create-event-button {
+    width: 20%; /* Adjust width as needed */
+    height: 15%;
+    background-color: #454a45; /* Background color for the event */
+    color: white; /* Text color */
+    border-radius: 25px; /* Rounded corners */
+    padding: 10px; /* Padding inside the rectangle */
+    text-align: center; /* Align text to the center
+    font-family: Arial, sans-serif; /* Font style */
+    font-size: 20px;
+    font-weight: bold;
+    margin: 20px 0 20% 0px; /* 20px margin from the top, right, and bottom, and 20px from the left */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a slight shadow */
+    
+}
