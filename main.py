@@ -10,46 +10,55 @@ from backend.signup import add_student_to_event, remove_student_from_event
 
 app = Flask(__name__)
 
+#global variables to be changed when backend can
+def get_user_info():
+    isorganiser = True
+    logined = False
+    return isorganiser, logined 
 
 @app.route('/') # Sprint 2 / MVP
 def index(): 
-    return render_template("pages/index/index.html")
+    isorganiser, logined = get_user_info()
+    return render_template("pages/index/index.html", isorganiser=isorganiser, logined=logined)
     
 
 @app.route('/student') # Sprint 2 / MVP
 def student_page():
-    return render_template('/pages/student/student.html', events= [{"id":"blm day", "topic":"gimme fried chicken"},
+    isorganiser, logined = get_user_info()
+    return render_template('/pages/student/student.html', isorganiser=isorganiser , logined=logined, events= [{"id":"blm day", "topic":"gimme fried chicken"},
                                                                    {"id":"reverse blm day", "topic":"steal my fried chicken"}])
 
 @app.route('/student/event_details', methods = ["GET", "POST"]) #type: ignore
 def student_details_page():
+    isorganiser, logined = get_user_info()
     student_event_details = None
     if request.method == "POST":
         if "signup" in request.form:
             action = request.form["signup"]
             add_student_to_event(user, student_event_details["event_id"]) # type: ignore -> surely login comes before this so we have 'user'
-            return render_template('/pages/studenteventdetails/studenteventdetails.html', event = student_event_details, misc_msg="Signed up successfully!") #type: ignore
+            return render_template('/pages/studenteventdetails/studenteventdetails.html', logined=logined, isorganiser=isorganiser, event = student_event_details, misc_msg="Signed up successfully!") #type: ignore
     
         if "unregister" in request.form:
             action = request.form["unregister"]
             remove_student_from_event(user, student_event_details["event_id"]) # type: ignore -> surely login comes before this so we have 'user'
-            return render_template('/pages/studenteventdetails/studenteventdetails.html', event = student_event_details, misc_msg="Unregistered successfully!") #type: ignore
+            return render_template('/pages/studenteventdetails/studenteventdetails.html', logined=logined, isorganiser=isorganiser, event = student_event_details, misc_msg="Unregistered successfully!") #type: ignore
         
         if "what_event" in request.form:
             event_topic = request.form["what_event"]
             student_event_details = retrieve_byname(event_topic)
-            return render_template('/pages/studenteventdetails/studenteventdetails.html', event = student_event_details) #type: ignore
+            return render_template('/pages/studenteventdetails/studenteventdetails.html', logined=logined, isorganiser=isorganiser, event = student_event_details) #type: ignore
 
         else:
             return redirect("/student")
 
     elif request.method == "GET":
-        return render_template('/pages/studenteventdetails/studenteventdetails.html', event = student_event_details) #type: ignore
+        return render_template('/pages/studenteventdetails/studenteventdetails.html', logined=logined, isorganiser=isorganiser, event = student_event_details) #type: ignore
 
 @app.route('/login', methods = ["GET", "POST"]) # Sprint 2 / MVP
 def login_page():
+    isorganiser, logined = get_user_info()
     if request.method == "GET":
-        return render_template('pages/login/login.html')
+        return render_template('pages/login/login.html', logined=logined, isorganiser=isorganiser)
     else:
         user = request.form["username"]
         pw = request.form["password"]
@@ -67,55 +76,63 @@ def login_page():
             elif account == "organiser":
                 return redirect("/organiser")
             else:
-                return render_template('pages/login/login.html')
+                return render_template('pages/login/login.html', logined=logined, isorganiser=isorganiser)
         else:
-            return render_template("pages/login/login.html", error_msg = "Login Unsuccessful")
+            return render_template("pages/login/login.html", logined=logined, isorganiser=isorganiser, error_msg = "Login Unsuccessful")
 
 @app.route('/register')
 def register():
-    session.pop("user_name")
-    return render_template("/pages/register/register.html")
+    isorganiser, logined = get_user_info()
+    return render_template("/pages/register/register.html", logined=logined, isorganiser=isorganiser)
 
 @app.route('/organiser/create_event', methods = ["GET", "POST"]) # Sprint 2 / MVP
 def organiser_create_event_page():
+    isorganiser, logined = get_user_info()
     if request.method == "GET":
-        return render_template('pages/create_event/create_event.html')
+        return render_template('pages/create_event/create_event.html',logined=logined, isorganiser=isorganiser)
     else:
         
-        return render_template('pages/login/login.html')
+        return render_template('pages/login/login.html', logined=logined, isorganiser=isorganiser)
         
 
 @app.route('/organiser')
 def organiser_page():
-    return render_template("pages/organiser/organiser.html", events=[{"id":"ny fiesta", "topic":"throw pch into the water"},
+    isorganiser, logined = get_user_info()
+    return render_template("pages/organiser/organiser.html", logined=logined, isorganiser=isorganiser, events=[{"id":"ny fiesta", "topic":"throw pch into the water"},
                                                                      {"id":"sigma day", "topic":"chicken jockey"}])
 
 
 @app.route('/organiser/events')
 def organiser_events_page():
+    isorganiser, logined = get_user_info()
     return "organiser events page"
 
 
 
 @app.route('/about')
 def about_page():
-    return render_template("pages/about/about.html")
+    isorganiser, logined = get_user_info()
+    return render_template("pages/about/about.html", logined=logined, isorganiser=isorganiser)
 
 @app.route("/contact")
 def contact_page():
-    return render_template("pages/contact/contact.html")
+    isorganiser, logined = get_user_info()
+    return render_template("pages/contact/contact.html",logined=logined, isorganiser=isorganiser)
 
 @app.route("/features")
 def features_page():
-    return render_template("pages/features/features.html")
+    isorganiser, logined = get_user_info()
+    return render_template("pages/features/features.html", logined=logined, isorganiser=isorganiser)
 
 @app.route("/privacy")
 def privacy_page():
-    return render_template("pages/privacy/privacy.html")
+    isorganiser, logined = get_user_info()
+    return render_template("pages/privacy/privacy.html", logined=logined, isorganiser=isorganiser)
     
 @app.route("/terms")
 def terms_page():
-    return render_template("pages/terms/terms.html")
+    isorganiser, logined = get_user_info()
+    return render_template("pages/terms/terms.html", logined=logined, isorganiser=isorganiser)
 
 @app.route("/flag.txt")
 def flag():
