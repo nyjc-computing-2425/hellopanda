@@ -20,18 +20,13 @@ class TestAccountRetrieveFunctions(unittest.TestCase):
 
         cursor = conn.execute("SELECT * FROM account")
         rows = cursor.fetchall()
-        try:
-            self.assertEqual(list(rows[0]), ['abc@gmail.com', 'abcde', '@R3alPassword', 'student', 'Jonathan Lim', 2426, 2025])
         
-        except:
-            conn.execute(backend.sql.DELETE_TABLE_ACCOUNT)
-            conn.commit()
-            conn.close()
-
         conn.execute(backend.sql.DELETE_TABLE_ACCOUNT)
         conn.commit()
+        
         conn.close()
 
+        self.assertEqual(list(rows[0]), ['abc@gmail.com', 'abcde', '@R3alPassword', 'student', 'Jonathan Lim', 2426, 2025])
 
     def test_retrieve_by_name(self):
         conn = sqlite3.connect('tests/test.db')
@@ -42,17 +37,12 @@ class TestAccountRetrieveFunctions(unittest.TestCase):
 
         cursor = conn.execute(backend.sql.RETRIEVE_ACCOUNT_BYNAME, ['Jonathan Lim'])
         rows = cursor.fetchall()
-        try:
-            self.assertEqual(list(rows[0]), ['abc@gmail.com', 'abcde', '@R3alPassword', 'student', 'Jonathan Lim', 2426, 2025])
-        
-        except:
-            conn.execute(backend.sql.DELETE_TABLE_ACCOUNT)
-            conn.commit()
-            conn.close()
 
         conn.execute(backend.sql.DELETE_TABLE_ACCOUNT)
         conn.commit()
         conn.close()
+
+        self.assertEqual(list(rows[0]), ['abc@gmail.com', 'abcde', '@R3alPassword', 'student', 'Jonathan Lim', 2426, 2025])
 
     def test_retrieve_by_class(self):
         conn = sqlite3.connect('tests/test.db')
@@ -63,17 +53,13 @@ class TestAccountRetrieveFunctions(unittest.TestCase):
 
         cursor = conn.execute(backend.sql.RETRIEVE_ACCOUNT_BYCLASS, ['2426'])
         rows = cursor.fetchall()
-        try:
-            self.assertEqual(list(rows[0]), ['abc@gmail.com', 'abcde', '@R3alPassword', 'student', 'Jonathan Lim', 2426, 2025])
         
-        except:
-            conn.execute(backend.sql.DELETE_TABLE_ACCOUNT)
-            conn.commit()
-            conn.close()
-
         conn.execute(backend.sql.DELETE_TABLE_ACCOUNT)
         conn.commit()
         conn.close()
+
+        self.assertEqual(list(rows[0]), ['abc@gmail.com', 'abcde', '@R3alPassword', 'student', 'Jonathan Lim', 2426, 2025])
+
 
 
     def test_retrieve_by_email(self):
@@ -85,18 +71,12 @@ class TestAccountRetrieveFunctions(unittest.TestCase):
 
         cursor = conn.execute(backend.sql.RETRIEVE_ACCOUNT_BYEMAIL, ['abc@gmail.com'])
         rows = cursor.fetchall()
-        try:
-            self.assertEqual(list(rows[0]), ['abc@gmail.com', 'abcde', '@R3alPassword', 'student', 'Jonathan Lim', 2426, 2025])
-        
-        except:
-            conn.execute(backend.sql.DELETE_TABLE_ACCOUNT)
-            conn.commit()
-            conn.close()
-
+      
         conn.execute(backend.sql.DELETE_TABLE_ACCOUNT)
         conn.commit()
         conn.close()
 
+        self.assertEqual(list(rows[0]), ['abc@gmail.com', 'abcde', '@R3alPassword', 'student', 'Jonathan Lim', 2426, 2025])
 
     def test_retrieve_by_year(self):
         conn = sqlite3.connect('tests/test.db')
@@ -108,19 +88,12 @@ class TestAccountRetrieveFunctions(unittest.TestCase):
         cursor = conn.execute(backend.sql.RETRIEVE_ACCOUNT_BYYEAR, ['2025'])
         rows = cursor.fetchall()
 
-        try:
-            self.assertEqual(list(rows[0]), ['abc@gmail.com', 'abcde', '@R3alPassword', 'student', 'Jonathan Lim', 2426, 2025])
-        except:
-            print('error')
-            conn.execute(backend.sql.DELETE_TABLE_ACCOUNT)
-            conn.commit()
-            
-            conn.close()
-
         conn.execute(backend.sql.DELETE_TABLE_ACCOUNT)
         conn.commit()
-        
+            
         conn.close()
+
+        self.assertEqual(list(rows[0]), ['abc@gmail.com', 'abcde', '@R3alPassword', 'student', 'Jonathan Lim', 2426, 2025])
 
 class TestAccountUpdateFunctions(unittest.TestCase):
     def test_update_name(self):
