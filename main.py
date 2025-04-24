@@ -21,6 +21,7 @@ def student_page():
                                                                    {"id":"reverse blm day", "topic":"steal my fried chicken"}])
 @app.route('/logout')
 def logout():
+    session["user"].pop()
     return render_template("/pages/logout/logout.html")
 
 @app.route('/login', methods = ["GET", "POST"]) # Sprint 2 / MVP
