@@ -6,7 +6,7 @@ from flask import Flask, abort, redirect, render_template, request, session
 # from validate import authenticate
 from backend.__init__ import acc_type, validate
 from backend.event import retrieve_byname
-from backend.signup import add_student_to_event, remove_student_from_event
+from backend.signup import add_student_to_event, remove_student_from_event, mark_attendance
 
 app = Flask(__name__)
 
@@ -92,7 +92,19 @@ def organiser_page():
 
 @app.route('/organiser/events')
 def organiser_events_page():
-    return "organiser events page"
+    student_data = []
+    event_data = {}
+    event_id = event_data["id"]
+    if request.method == "GET":
+        return render_template('pages/organiser-events/organiser-events.html', event_data = event_data)
+    else:
+        for elem in student_data:
+            email = elem["email"]
+            if email in request.form:
+                elem["attendance"] = 1
+            else:
+                elem["attendance"] = 0
+        return render_template('pages/organiser-events/organiser-events.html', student_data = student_data)
 
 
 
