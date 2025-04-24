@@ -173,8 +173,8 @@ GET_EVENT_PARTICIPATION = """
     """
 
 MARK_ATTENDENCE = """
-        UPDATE signup SET "attendance" = 1
-        WHERE email = ? AND event_id = ?       
+        UPDATE signup SET "attendance" = ?
+        WHERE email = ? AND event_id = ?    
     """
 
 IS_PRESENT ="""
