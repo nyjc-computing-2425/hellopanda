@@ -27,11 +27,12 @@ def student_details_page():
     if request.method == "POST":
         if "signup" in request.form:
             action = request.form["signup"]
-            #add_student_to_event( student[name],student_event_details["event_id"])
+            add_student_to_event(user, student_event_details["event_id"]) # type: ignore -> surely login comes before this so we have 'user'
             return render_template('/pages/studenteventdetails/studenteventdetails.html', event = student_event_details, misc_msg="Signed up successfully!") #type: ignore
     
         if "unregister" in request.form:
             action = request.form["unregister"]
+            remove_student_from_event(user, student_event_details["event_id"]) # type: ignore -> surely login comes before this so we have 'user'
             return render_template('/pages/studenteventdetails/studenteventdetails.html', event = student_event_details, misc_msg="Unregistered successfully!") #type: ignore
         
         if "what_event" in request.form:
