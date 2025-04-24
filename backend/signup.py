@@ -27,8 +27,8 @@ def get_event_participants(event_id):
     results = execute_query(sql.GET_EVENT_PARTICIPATION, [event_id])
     return [row["email"] for row in results]
 
-def mark_attendance(email, event_id):
-    execute_query(sql.MARK_ATTENDENCE,[email, event_id])
+def mark_attendance(attendance, email, event_id):
+    execute_query(sql.MARK_ATTENDENCE,[attendance, email, event_id])
 
 def is_present(email, event_id):
     results = execute_query(sql.IS_PRESENT, [email, event_id])
