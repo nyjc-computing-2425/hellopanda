@@ -1,12 +1,12 @@
 
 <div class="rounded-rectangle">
     <div class="rectangle-content">
-        <p>ID: {{event.id}}</p>
+        <p>ID: {{event.topic}}</p>
     </div>
     <div class="rectangle-content">
-        <p>Topic: {{event.topic}}</p>
+        <p>Topic: {{event.synopsis}}</p>
     </div>
-    <form id="view-event-button-wrapper" action="/student/event_details" method="POST">
+    <form id="view-event-button-wrapper" action="/student/event_details?id={{event.topic}}" method="POST">
         <input type="hidden" name="what_event" value="{{event.topic}}">
         <button id="view-event-button" type="submit">View Event</button>
     </form>

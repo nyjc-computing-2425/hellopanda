@@ -7,6 +7,9 @@ from flask import Flask, abort, redirect, render_template, request, session
 from backend.__init__ import acc_type, validate
 from backend.event import retrieve_byname, retrieve_all_events
 from backend.signup import add_student_to_event, remove_student_from_event
+from backend.account import store_account_data
+from backend.validate import *
+from backend.password import *
 
 app = Flask(__name__)
 app.secret_key = secrets.token_hex(32)  # generate secure key
@@ -31,13 +34,14 @@ def index():
 @app.route('/student') # Sprint 2 / MVP
 def student_page():
     isorganiser, logined = get_user_info()
-    return render_template('/pages/student/student.html', isorganiser=isorganiser , logined=logined, events= [{"id":"blm day", "topic":"gimme fried chicken"},
-                                                                   {"id":"reverse blm day", "topic":"steal my fried chicken"}])
+    return render_template('/pages/student/student.html', isorganiser=isorganiser , logined=logined, events=retrieve_all_events())
 
 @app.route('/student/event_details', methods = ["GET", "POST"]) #type: ignore
 def student_details_page():
     isorganiser, logined = get_user_info()
-    student_event_details = None
+    student_event_details = retrieve_byname(request.args.get("id"))[0]
+    print(request.args.get("id"))
+    print(student_event_details)
     if request.method == "POST":
         if "signup" in request.form:
             action = request.form["signup"]
@@ -61,7 +65,7 @@ def student_details_page():
         return render_template('/pages/studenteventdetails/studenteventdetails.html', logined=logined, isorganiser=isorganiser, event = student_event_details) #type: ignore
 @app.route('/logout')
 def logout():
-    session.pop("user_name")
+    session.pop("username")
     return render_template("/pages/logout/logout.html")
     
 @app.route('/login', methods = ["GET", "POST"]) # Sprint 2 / MVP
@@ -81,7 +85,7 @@ def login_page():
         if authenticated:
             session["user_name"] = user
             session["password"] = pw
-            session["email"] = "temporary@fakemail.com"
+            
 
             if account == "student":
                 return redirect("/student")
@@ -92,10 +96,35 @@ def login_page():
         else:
             return render_template("pages/login/login.html", logined=logined, isorganiser=isorganiser, error_msg = "Login Unsuccessful")
 
-@app.route('/register')
+@app.route('/register', methods = ["GET", "POST"])
 def register():
     isorganiser, logined = get_user_info()
-    return render_template("/pages/register/register.html", logined=logined, isorganiser=isorganiser)
+    if request.method == "GET":
+        return render_template("/pages/register/register.html")
+    else:
+        if not email(request.form["email"]):
+            message = "Invalid email"
+            return render_template("/pages/register/register.html", logined=logined, isorganiser=isorganiser, message=message)
+        if not password(request.form["password"]):
+            message = "Invalid password"
+            return render_template("/pages/register/register.html", logined=logined, isorganiser=isorganiser, message=message)
+        if not name(request.form["name"]):
+            message = "Invalid name"
+            return render_template("/pages/register/register.html", logined=logined, isorganiser=isorganiser, message=message)
+        if not class_number(request.form["class"]):
+            message = "Invalid class"
+            return render_template("/pages/register/register.html", logined=logined, isorganiser=isorganiser, message=message)
+        if not request.form["role"]:
+            message = "Select a role"
+            return render_template("/pages/register/register.html", logined=logined, isorganiser=isorganiser, message=message)
+        
+        # Valid data
+     
+        hash, salt = hash_password(request.form["password"], generate_salt(4))
+        print(request.form["role"])
+        store_account_data(request.form["email"], salt, str(hash), request.form["role"], request.form["name"], request.form["class"], None)
+        return render_template("/pages/register/register.html", logined=logined, isorganiser=isorganiser, message="Successful!")
+    
 
 @app.route('/organiser/create_event', methods = ["GET", "POST"]) # Sprint 2 / MVP
 def organiser_create_event_page():
