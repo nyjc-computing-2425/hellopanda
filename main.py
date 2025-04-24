@@ -53,7 +53,11 @@ def student_details_page():
 
     elif request.method == "GET":
         return render_template('/pages/studenteventdetails/studenteventdetails.html', logined=logined, isorganiser=isorganiser, event = student_event_details) #type: ignore
-
+@app.route('/logout')
+def logout():
+    session.pop("user_name")
+    return render_template("/pages/logout/logout.html")
+    
 @app.route('/login', methods = ["GET", "POST"]) # Sprint 2 / MVP
 def login_page():
     isorganiser, logined = get_user_info()
