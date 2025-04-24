@@ -17,7 +17,11 @@ def index():
 @app.route('/student') # Sprint 2 / MVP
 def student_page():
     return render_template('/pages/student/student.html', events= [{"id":"blm day", "topic":"gimme fried chicken"},
+                        
                                                                    {"id":"reverse blm day", "topic":"steal my fried chicken"}])
+@app.route('/logout')
+def logout():
+    return render_template("/pages/logout/logout.html")
 
 @app.route('/login', methods = ["GET", "POST"]) # Sprint 2 / MVP
 def login_page():
