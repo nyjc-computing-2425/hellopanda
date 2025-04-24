@@ -158,8 +158,8 @@ GET_SIGN_UP_EVENT = """
     """
 
 ADD_STUDENT_TO_EVENT = """
-        INSERT INTO signup
-        VALUES (?, ?, ?)
+        INSERT INTO signup (email, event_id)
+        VALUES (?, ?) 
     """
 
 REMOVE_STUDENT_FROM_EVENT = """
