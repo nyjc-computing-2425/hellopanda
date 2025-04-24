@@ -73,6 +73,7 @@ def login_page():
 
 @app.route('/register')
 def register():
+    session.pop("user_name")
     return render_template("/pages/register/register.html")
 
 @app.route('/organiser/create_event', methods = ["GET", "POST"]) # Sprint 2 / MVP
