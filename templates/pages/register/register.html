@@ -5,7 +5,15 @@
 	<link href='https://fonts.googleapis.com/css?family=League Spartan' rel='stylesheet'>
 {% endblock %}
 {% block content %}
-	<form action = '/login' method="POST">
+	<form action = '/register' method="POST">
+	<div class="role-select">
+		<h5 style="font-family: 'Georgia', serif;">CHOOSE YOUR ROLE</h5>
+		<div class="role-buttons">
+			<button type="button" class="role-button" onclick="selectRole('participant')">Participant</button>
+			<button type="button" class="role-button" onclick="selectRole('organiser')">Organiser</button>
+		</div>
+		<input type="hidden" name="role" id="role-field" value="">
+	</div>
 	<div class="container">
     <div class="label"><label for ='name-field'> NAME:</label></div>
 		<div class="input-box">
@@ -25,11 +33,25 @@
 			<i class="fas fa-lock"></i>
 			<input id='pass-field' type='password' name='password'  value=''>
 		</div>
-	<button type="submit">REGISTER</button>
+	<button type="submit" class="reg-button">REGISTER</button>
 	</form>
 	</div>
+
+	<script>
+		function selectRole(role) {
+			const buttons = document.querySelectorAll(".role-button");
+			buttons.forEach(button => {
+				button.classList.remove("selected");
+			});
+			const clickedButton = Array.from(buttons).find(button => button.textContent.toLowerCase() === role);
+			if (clickedButton) {
+				clickedButton.classList.add("selected");
+			}
+		}
+	</script>
+	
 {% endblock %}
 
 {% block css %}
-    {% include "/pages/login/login.css" %}
+    {% include "/pages/register/register.css" %}
 {% endblock %}
