@@ -5,15 +5,15 @@ from flask import Flask, abort, redirect, render_template, request, session
 
 # from validate import authenticate
 from backend.__init__ import acc_type, validate
-from backend.event import retrieve_byname
+from backend.event import retrieve_byname, retrieve_all_events
 from backend.signup import add_student_to_event, remove_student_from_event
 
 app = Flask(__name__)
 
 #global variables to be changed when backend can
 def get_user_info():
-    isorganiser = True
-    logined = False
+    isorganiser = False
+    logined = True
     return isorganiser, logined 
 
 @app.route('/') # Sprint 2 / MVP
