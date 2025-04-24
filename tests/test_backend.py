@@ -20,12 +20,18 @@ class TestAccountRetrieveFunctions(unittest.TestCase):
 
         cursor = conn.execute("SELECT * FROM account")
         rows = cursor.fetchall()
-        self.assertEqual(list(rows[0]), ['abc@gmail.com', 'abcde', '@R3alPassword', 'student', 'Jonathan Lim', 2426, 2025])
+        try:
+            self.assertEqual(list(rows[0]), ['abc@gmail.com', 'abcde', '@R3alPassword', 'student', 'Jonathan Lim', 2426, 2025])
         
+        except:
+            conn.execute(backend.sql.DELETE_TABLE_ACCOUNT)
+            conn.commit()
+            conn.close()
+
         conn.execute(backend.sql.DELETE_TABLE_ACCOUNT)
         conn.commit()
-        
         conn.close()
+
 
     def test_retrieve_by_name(self):
         conn = sqlite3.connect('tests/test.db')
@@ -36,13 +42,17 @@ class TestAccountRetrieveFunctions(unittest.TestCase):
 
         cursor = conn.execute(backend.sql.RETRIEVE_ACCOUNT_BYNAME, ['Jonathan Lim'])
         rows = cursor.fetchall()
-        self.assertEqual(list(rows[0]), ['abc@gmail.com', 'abcde', '@R3alPassword', 'student', 'Jonathan Lim', 2426, 2025])
+        try:
+            self.assertEqual(list(rows[0]), ['abc@gmail.com', 'abcde', '@R3alPassword', 'student', 'Jonathan Lim', 2426, 2025])
         
+        except:
+            conn.execute(backend.sql.DELETE_TABLE_ACCOUNT)
+            conn.commit()
+            conn.close()
+
         conn.execute(backend.sql.DELETE_TABLE_ACCOUNT)
         conn.commit()
-        
         conn.close()
-    
 
     def test_retrieve_by_class(self):
         conn = sqlite3.connect('tests/test.db')
@@ -53,12 +63,18 @@ class TestAccountRetrieveFunctions(unittest.TestCase):
 
         cursor = conn.execute(backend.sql.RETRIEVE_ACCOUNT_BYCLASS, ['2426'])
         rows = cursor.fetchall()
-        self.assertEqual(list(rows[0]), ['abc@gmail.com', 'abcde', '@R3alPassword', 'student', 'Jonathan Lim', 2426, 2025])
+        try:
+            self.assertEqual(list(rows[0]), ['abc@gmail.com', 'abcde', '@R3alPassword', 'student', 'Jonathan Lim', 2426, 2025])
         
+        except:
+            conn.execute(backend.sql.DELETE_TABLE_ACCOUNT)
+            conn.commit()
+            conn.close()
+
         conn.execute(backend.sql.DELETE_TABLE_ACCOUNT)
         conn.commit()
-        
         conn.close()
+
 
     def test_retrieve_by_email(self):
         pass
