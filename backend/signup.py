@@ -18,7 +18,7 @@ def get_signed_up_events(email):
     return [row["event_id"] for row in dic]
 
 def add_student_to_event(email, event_id):
-    execute_query(sql.ADD_STUDENT_TO_EVENT , [email, event_id, False])
+    execute_query(sql.ADD_STUDENT_TO_EVENT , [email, event_id])
     
 def remove_student_from_event(email, event_id):
     execute_query(sql.REMOVE_STUDENT_FROM_EVENT, [email, event_id])
