@@ -9,12 +9,18 @@ from backend.event import retrieve_byname, retrieve_all_events
 from backend.signup import add_student_to_event, remove_student_from_event
 
 app = Flask(__name__)
+app.secret_key = secrets.token_hex(32)  # generate secure key
 
 #global variables to be changed when backend can
 def get_user_info():
     isorganiser = False
-    logined = True
+    logined = False
+
+    uemail = session.get('email', "no email")
+    if uemail == "fake stuff": isorganiser = True
+
     return isorganiser, logined 
+
 
 @app.route('/') # Sprint 2 / MVP
 def index(): 
@@ -71,6 +77,8 @@ def login_page():
         if authenticated:
             session["user_name"] = user
             session["password"] = pw
+            session["email"] = "temporary@fakemail.com"
+
             if account == "student":
                 return redirect("/student")
             elif account == "organiser":
