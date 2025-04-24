@@ -7,6 +7,9 @@ from flask import Flask, abort, redirect, render_template, request, session
 from backend.__init__ import acc_type, validate
 from backend.event import retrieve_byname
 from backend.signup import add_student_to_event, remove_student_from_event
+from backend.account import store_account_data
+from backend.validate import *
+from backend.password import *
 
 app = Flask(__name__)
 
@@ -71,11 +74,30 @@ def login_page():
         else:
             return render_template("pages/login/login.html", error_msg = "Login Unsuccessful")
 
-@app.route('/register')
+@app.route('/register', methods = ["GET", "POST"])
 def register():
-    session.pop("user_name")
-    return render_template("/pages/register/register.html")
-
+    if request.method == "GET":
+        return render_template("/pages/register/register.html")
+    else:
+        if not email(request.form["email"]):
+            message = "Invalid email"
+            return render_template("/pages/register/register.html", message=message)
+        if not password(request.form["password"]):
+            message = "Invalid password"
+            return render_template("/pages/register/register.html", message=message)
+        if not name(request.form["name"]):
+            message = "Invalid name"
+            return render_template("/pages/register/register.html", message=message)
+        if not class_number(request.form["class"]):
+            message = "Invalid class"
+            return render_template("/pages/register/register.html", message=message)
+        
+        # Valid data
+        print("siuccess")
+        hash, salt = hash_password(request.form["password"], generate_salt(4))
+        print(request.form["role"])
+        store_account_data(request.form["email"], salt, str(hash), request.form["role"], request.form["name"], request.form["class"], None)
+        return render_template("/pages/register/register.html", message="Successful!")
 @app.route('/organiser/create_event', methods = ["GET", "POST"]) # Sprint 2 / MVP
 def organiser_create_event_page():
     if request.method == "GET":

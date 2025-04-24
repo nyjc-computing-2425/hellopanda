@@ -1,11 +1,11 @@
 from backend import account, event, signup
 
-# account.create_account_table()
-# account.store_account_data("notjohn@gmail.com", "salty", 123, "student", "hehe", 2426, 2025)
-# account.update_class("notjohn@gmail.com", 2426)
-# account.update_year("notjohn@gmail.com", 1000)
-# print(account.retrieve_byclass(2426))
-# print(account.acc_type("john@gmail.com"))
+account.create_account_table()
+account.store_account_data("notjohn@gmail.com", "salty", 123, "student", "hehe", 2426, 2025)
+account.update_class("notjohn@gmail.com", 2426)
+account.update_year("notjohn@gmail.com", 1000)
+print(account.retrieve_byclass(2426))
+print(account.acc_type("john@gmail.com"))
 
 # event.delete_event_table()
 # event.create_event_table()
