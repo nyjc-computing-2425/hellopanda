@@ -5,6 +5,8 @@ from flask import Flask, abort, redirect, render_template, request, session
 
 # from validate import authenticate
 from backend.__init__ import acc_type
+from backend.event import retrieve_byname
+from backend.signup import add_student_to_event, remove_student_from_event
 
 app = Flask(__name__)
 
@@ -19,29 +21,29 @@ def student_page():
     return render_template('/pages/student/student.html', events= [{"id":"blm day", "topic":"gimme fried chicken"},
                                                                    {"id":"reverse blm day", "topic":"steal my fried chicken"}])
 
-@app.route('/student/event_details', methods = ["GET", "POST"])
+@app.route('/student/event_details', methods = ["GET", "POST"]) #type: ignore
 def student_details_page():
-    if request.method == "GET":
-        return render_template('/pages/studenteventdetails/studenteventdetails.html', event={"name": "reverse blm day",
-                                                                                             "date": "4 July 2025",
-                                                                                             "location": "KFC",
-                                                                                             "description": "steal as much fried chicken as possible",
-                                                                                             "slots": "100"})
-    elif request.method == "POST":
+    student_event_details = None
+    if request.method == "POST":
         if "signup" in request.form:
             action = request.form["signup"]
-            return render_template('/pages/studenteventdetails/studenteventdetails.html', misc_msg = "Signed up sucessfully!", event={"name": "reverse blm day",
-                                                                                             "date": "4 July 2025",
-                                                                                             "location": "KFC",
-                                                                                             "description": "steal as much fried chicken as possible",
-                                                                                             "slots": "100"}) #temp
+            #add_student_to_event( student[name],student_event_details["event_id"])
+            return render_template('/pages/studenteventdetails/studenteventdetails.html', event = student_event_details, misc_msg="Signed up successfully!") #type: ignore
+    
         if "unregister" in request.form:
             action = request.form["unregister"]
-            return render_template('/pages/studenteventdetails/studenteventdetails.html', misc_msg="Unregistered successfully!", event={"name": "reverse blm day",
-                                                                                             "date": "4 July 2025",
-                                                                                             "location": "KFC",
-                                                                                             "description": "steal as much fried chicken as possible",
-                                                                                             "slots": "100"}) #temp
+            return render_template('/pages/studenteventdetails/studenteventdetails.html', event = student_event_details, misc_msg="Unregistered successfully!") #type: ignore
+        
+        if "what_event" in request.form:
+            event_topic = request.form["what_event"]
+            student_event_details = retrieve_byname(event_topic)
+            return render_template('/pages/studenteventdetails/studenteventdetails.html', event = student_event_details) #type: ignore
+
+        else:
+            return redirect("/student")
+
+    elif request.method == "GET":
+        return render_template('/pages/studenteventdetails/studenteventdetails.html', event = student_event_details) #type: ignore
 
 @app.route('/login', methods = ["GET", "POST"]) # Sprint 2 / MVP
 def login_page():
