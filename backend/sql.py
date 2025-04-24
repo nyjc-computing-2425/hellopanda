@@ -176,3 +176,9 @@ MARK_ATTENDENCE = """
         UPDATE signup SET "attendance" = 1
         WHERE email = ? AND event_id = ?       
     """
+
+IS_PRESENT ="""
+        SELECT "attendance" FROM signup
+        WHERE email = ? AND event_id = ?
+        
+    """

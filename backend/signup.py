@@ -31,10 +31,6 @@ def mark_attendance(email, event_id):
     execute_query(sql.MARK_ATTENDENCE,[email, event_id])
 
 def is_present(email, event_id):
-    results = execute_query("""
-        SELECT "attendance" FROM signup
-        WHERE email = ? AND event_id = ?
-        
-    """, [email, event_id])
+    results = execute_query(sql.IS_PRESENT, [email, event_id])
     return bool(results[0]["attendance"])
 
