@@ -98,9 +98,6 @@ class TestAccountRetrieveFunctions(unittest.TestCase):
         conn.close()
 
 
-    def test_retrieve_by_email(self):
-        pass
-
     def test_retrieve_by_year(self):
         conn = sqlite3.connect('tests/test.db')
         
