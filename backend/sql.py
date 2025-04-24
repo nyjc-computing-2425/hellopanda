@@ -65,8 +65,8 @@ UPDATE_ACCOUNT_EMAIL = """
 
 UPDATE_ACCOUNT_YEAR = """
         UPDATE account
-        SET year = ?
-        WHERE email = ?;
+        SET graduation_year = ?
+        WHERE email = ?; 
     """
 
 
