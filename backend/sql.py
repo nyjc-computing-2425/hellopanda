@@ -69,6 +69,11 @@ UPDATE_ACCOUNT_YEAR = """
         WHERE email = ?; 
     """
 
+DELETE_ACCOUNT = """
+        DELETE FROM account
+        WHERE email = ?;
+    """
+
 
 #EVENTS
 CREATE_TABLE_EVENTS = """
