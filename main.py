@@ -85,13 +85,13 @@ def login_page():
         if authenticated:
             session["user_name"] = user
             session["password"] = pw
-            
+            logined = True
 
             if account == "student":
                 return redirect("/student")
             elif account == "organiser":
                 return redirect("/organiser")
-            else:
+            else: # should not exist at all but we leave here first -kenneth
                 return render_template('pages/login/login.html', logined=logined, isorganiser=isorganiser)
         else:
             return render_template("pages/login/login.html", logined=logined, isorganiser=isorganiser, error_msg = "Login Unsuccessful")
