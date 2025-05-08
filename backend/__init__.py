@@ -4,13 +4,17 @@
 # please use instead:
 #    from backend import account
 #    from backend import event
-
+import os
 from . import account, event, sql, validate
 
 # The below usage will be deprecated in Sprint 4
 from .account import *
 from .event import *
 
+# The environment variable DB_TYPE is used to determine which database to use.
+# By default, it is "sqlite".
+# We will switch over to "postgres" for future development.
+os.environ["DB_TYPE"] = "sqlite"
 
 
 if __name__ == "__main__":
