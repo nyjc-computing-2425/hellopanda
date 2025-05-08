@@ -11,7 +11,8 @@ from . import account, event, sql, validate
 from .account import *
 from .event import *
 
-os.environ["DB_type"] = "postgres"
+os.environ["DB_TYPE"] = "sqlite"
+
 
 if __name__ == "__main__":
     #create_account_table()
