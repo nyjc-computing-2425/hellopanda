@@ -11,6 +11,9 @@ from . import account, event, sql, validate
 from .account import *
 from .event import *
 
+# The environment variable DB_TYPE is used to determine which database to use.
+# By default, it is "sqlite".
+# We will switch over to "postgres" for future development.
 os.environ["DB_TYPE"] = "sqlite"
 
 
