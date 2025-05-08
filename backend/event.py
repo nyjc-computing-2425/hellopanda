@@ -15,7 +15,7 @@ def delete_event_table():
     execute_query(sql.DELETE_TABLE_EVENT)
 
 # Function to store event data
-def store_event_data(event_id, start, end, topic, synopsis, venue) -> None:
+def store_event_data(event_id, start, end, topic, synopsis, venue, organiser_email) -> None:
     """
     Stores event data
 
@@ -38,14 +38,20 @@ def store_event_data(event_id, start, end, topic, synopsis, venue) -> None:
 
     venue: str
         The venue of event
+
+    organiser_email: str
+        The email of the organiser
           
     """
     execute_query(sql.INSERT_INTO_EVENT,
-        [event_id, start, end, topic, synopsis, venue])
+        [event_id, start, end, topic, synopsis, venue, organiser_email])
 
 #Functions to retrieve data
 def retrieve_byname(name):
     return execute_query(sql.RETRIEVE_EVENT_BYNAME,[name])
+
+def retrieve_byorganiser(organiser_email):
+    return execute_query(sql.RETRIEVE_EVENT_BYORGANISER,[organiser_email])
 
 #Functions to update event data
 def update_start(event_id, start):
@@ -79,4 +85,18 @@ def retrieve_upcoming_events():
     x = x[:19]
 
     return execute_query(sql.RETRIEVE_UPCOMING_EVENTS,[x]   )
+
+#Functions to download event data
+def participants_to_csv(event_id, filename):
+    """
+    Converts the participants of an event to a CSV format
+    """
+    participants = execute_query(sql.GET_EVENT_PARTICIPATION, [event_id])
+    csv_data = "Email, Attendance\n"
+    for participant in participants:
+        csv_data += f"{participant['email']}, {participant['attendance']}\n"
+    
+    with open(filename, "w") as f:
+        f.write(csv_data)
+    return True
 

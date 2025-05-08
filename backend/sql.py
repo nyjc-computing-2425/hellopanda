@@ -86,6 +86,7 @@ CREATE_TABLE_EVENTS = f"""
             "topic" TEXT NOT NULL,
             "synopsis" TEXT NOT NULL,
             "venue" TEXT,
+            "organiser_email" TEXT NOT NULL,
             PRIMARY KEY("event_id")
         );
     """
@@ -95,8 +96,8 @@ DELETE_TABLE_EVENT = f"""
     """
 
 INSERT_INTO_EVENT = f"""
-        INSERT INTO event (event_id, start_datetime, end_datetime, topic, synopsis, venue)
-        VALUES ({placeholder}, {placeholder}, {placeholder}, {placeholder}, {placeholder}, {placeholder})
+        INSERT INTO event (event_id, start_datetime, end_datetime, topic, synopsis, venue, organiser_email)
+        VALUES ({placeholder}, {placeholder}, {placeholder}, {placeholder}, {placeholder}, {placeholder},{placeholder})
     """
 
 UPDATE_EVENT_START = f"""UPDATE event 
@@ -123,6 +124,7 @@ UPDATE_EVENT_VENUE = f"""UPDATE event
         SET venue = {placeholder}
         WHERE ievent_idd = {placeholder}
     """
+
 RETRIEVE_ALL_EVENTS = f"""
         SELECT *
         FROM event;
@@ -132,6 +134,12 @@ RETRIEVE_EVENT_BYNAME = f"""
         SELECT *
         FROM event
         WHERE topic={placeholder}
+    """
+
+RETRIEVE_EVENT_BYORGANISER = f"""
+        SELECT *
+        FROM event
+        WHERE organiser_email={placeholder}
     """
 
 RETRIEVE_CURRENT_EVENTS = f"""
