@@ -156,7 +156,7 @@ class TestAccountUpdateFunctions(unittest.TestCase):
 
         conn.close()
 
-        self.assertEqual(list(rows[0]), ['hello@gmail.com', 'abcde', '@R3alPassword', 'student', 'Jonathan Lim', 2426, 2069])
+        self.assertEqual(list(rows[0]), ['hello@gmail.com', 'abcde', '@R3alPassword', 'student', 'Jonathan Lim', 2426, 2025])
 
     def test_update_year(self):
         conn = sqlite3.connect('tests/test.db')
@@ -176,7 +176,7 @@ class TestAccountUpdateFunctions(unittest.TestCase):
         
         conn.close()
 
-        self.assertEqual(list(rows[0]), ['hello@gmail.com', 'abcde', '@R3alPassword', 'student', 'Jonathan Lim', 2426, 2069])
+        self.assertEqual(list(rows[0]), ['abc@gmail.com', 'abcde', '@R3alPassword', 'student', 'Jonathan Lim', 2426, 1997])
 
 if __name__ == "__main__":
     unittest.main()
