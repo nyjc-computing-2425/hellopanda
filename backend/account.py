@@ -105,3 +105,7 @@ def check_email(email):
         return False
     else:
         return True
+
+#Delete account
+def delete_account(email):
+    execute_query(sql.DELETE_ACCOUNT, [email])

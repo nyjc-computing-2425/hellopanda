@@ -24,8 +24,7 @@ def remove_student_from_event(email, event_id):
     execute_query(sql.REMOVE_STUDENT_FROM_EVENT, [email, event_id])
 
 def get_event_participants(event_id):
-    results = execute_query(sql.GET_EVENT_PARTICIPATION, [event_id])
-    return [row["email"] for row in results]
+    return execute_query(sql.GET_EVENT_PARTICIPATION, [event_id])
 
 def mark_attendance(attendance, email, event_id):
     execute_query(sql.MARK_ATTENDENCE,[attendance, email, event_id])
