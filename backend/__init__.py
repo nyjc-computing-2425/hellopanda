@@ -4,14 +4,14 @@
 # please use instead:
 #    from backend import account
 #    from backend import event
-
+import os
 from . import account, event, sql, validate
 
 # The below usage will be deprecated in Sprint 4
 from .account import *
 from .event import *
 
-
+os.environ["DB_type"] = "postgres"
 
 if __name__ == "__main__":
     #create_account_table()
