@@ -12,13 +12,12 @@ def initialise():
 
     ########Dummy data##########
     account.store_account_data("notjohn@gmail.com", "JuWMqIugOlEtuXLC", "40493376214957570934363042765919812022617836654205352252256196165357072291861", "student", "hehe", 2426, 2025)
-    #password salty
+    #email: notjohn@gmail.com password: salty
     event.store_event_data(1, "2025-06-12 09:00:00", "2025-06-13 09:00:00", "Bad event", "hi  imagine events", "Home")
     event.store_event_data(2, "2025-04-10 09:00:00", "2025-06-13 09:00:00", "Another event", "HAHA!", "Probably in sch")
     signup.add_student_to_event("notjohn@gmail.com", 1)
 
 initialise()
-
 ###############ACCOUNT######################
 # print("Account")
 # account.update_class("notjohn@gmail.com", 2426)

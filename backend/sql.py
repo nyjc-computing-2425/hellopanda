@@ -44,7 +44,7 @@ RETRIEVE_ACCOUNT_BYEMAIL = f"""
 
 RETRIEVE_ACCOUNT_BYYEAR = f"""
         SELECT * FROM account
-        WHERE year = {placeholder};
+        WHERE graduation_year = {placeholder};
     """
 
 UPDATE_ACCOUNT_NAME = f"""
@@ -69,6 +69,11 @@ UPDATE_ACCOUNT_YEAR = f"""
         UPDATE account
         SET graduation_year = {placeholder}
         WHERE email = {placeholder}; 
+    """
+
+DELETE_ACCOUNT = """
+        DELETE FROM account
+        WHERE email = ?;
     """
 
 
