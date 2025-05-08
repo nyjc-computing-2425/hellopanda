@@ -65,7 +65,7 @@ def student_details_page():
         return render_template('/pages/studenteventdetails/studenteventdetails.html', logined=logined, isorganiser=isorganiser, event = student_event_details) #type: ignore
 @app.route('/logout')
 def logout():
-    session.pop("username")
+    session.pop(session["user_name"])
     return render_template("/pages/logout/logout.html")
     
 @app.route('/login', methods = ["GET", "POST"]) # Sprint 2 / MVP
