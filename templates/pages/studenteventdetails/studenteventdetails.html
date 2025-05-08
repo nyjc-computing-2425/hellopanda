@@ -8,41 +8,37 @@
         <div id="details">
             <table id="detail-table">
                 <tr class="detail-table-row">
-                    <td>Event Name: {dummy var}</td> <!-- add jinja variable here -->
+                    
+                    <td>Event Name: {{event[0].topic}}</td> <!-- add jinja variable here -->
                 </tr>
                 <tr class="detail-table-row">
-                    <td>Date: {dummy var}</td> <!-- add jinja variable here -->
+                    <td>Date: {{event[0].start_datetime}}</td> <!-- add jinja variable here -->
                 </tr>
                 <tr class="detail-table-row">
-                    <td>Location: {dummy var}</td> <!-- add jinja variable here -->
+                    <td>Location: {{event[0].venue}}</td> <!-- add jinja variable here -->
                 </tr>
                 <tr class="detail-table-row">
-                    <td>Description: {dummy var}</td> <!-- add jinja variable here -->
+                    <td>Description: {{event[0].synopsis}}</td> <!-- add jinja variable here -->
                 </tr>
                 <tr class="detail-table-row">
-                    <td>Number of slots: {dummy var}</td> <!-- add jinja variable here -->
+                    <td>Number of slots: {{event[0].slots}}</td> <!-- add jinja variable here -->
                 </tr>
             </table>
         </div>
-        <div id="buttons-div">
+        <form id="buttons-div" method="POST">
             <div>
-                <button id="signup-button">SIGN UP</button>
+                <button id="signup-button" name="signup" type="submit" value="signup">SIGN UP</button>
             </div>
             <div>
-                <button id="unregister-button">UNREGISTER</button>
+                <button id="unregister-button" name="unregister" type="submit" value="unregister">UNREGISTER</button>
+            </div>
+        </form>
+        {% if misc_msg %} <!-- can change if condition as needed-->
+        <div class="alert-wrapper">
+            <div class="alert">
+                <strong>{{misc_msg}}</strong>
             </div>
         </div>
+        {% endif %}
     </div>
-    {% if misc_msg %} <!-- can change if condition as needed-->
-        {% if misc_msg == "full"%}
-            <div id="misc_msg">
-                <h1>event too full</h1>
-            </div>
-        {% endif%}
-        {% if misc_msg == "success"%}
-            <div id="misc_msg">
-                <h1>registered successfully</h1>
-            </div>
-        {% endif%}
-    {% endif %}
 {% endblock %}

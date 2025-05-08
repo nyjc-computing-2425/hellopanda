@@ -1,0 +1,29 @@
+{% extends "template.html" %}
+
+{% block content %}
+    <div class="main-container-student">
+        
+        <div class="event-head-rounded-rectangle">
+            Organiser's events🥳: 
+            
+        </div>
+
+
+        <div class="head-event-display">These are your events:</div>
+        <div>
+            {% for event in events %}
+                <div class="event-wrapper">
+                    {% include "/components/event/orgevent.html" %}
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="create-event-button">
+           <a href="/student" style=" color: white; text-decoration: none;">create new event</a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block css %}
+    {% include"/pages/organiser/organiser.css" %}
+{% endblock %}
