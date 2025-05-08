@@ -15,9 +15,13 @@ app = Flask(__name__)
 app.secret_key = secrets.token_hex(32)  # generate secure key
 
 #global variables to be changed when backend can
+# joshua says it is a frontend work -kenneth
 def get_user_info():
     isorganiser = False
     logined = False
+
+    if session.get("user_name"):
+        logined = True
 
     uemail = session.get('email', "no email")
     if uemail == "fake stuff": isorganiser = True
@@ -85,8 +89,6 @@ def login_page():
         if authenticated:
             session["user_name"] = user
             session["password"] = pw
-            logined = True
-
             if account == "student":
                 return redirect("/student")
             elif account == "organiser":
