@@ -53,13 +53,7 @@ def execute_postgres_query(query, params=None) -> list[dict]:
     Returns:
         list[dict] if SELECT query, else None
     """
-    conn = psycopg2.connect(
-        dbname="your_db_name",
-        user="your_username",
-        password="your_password",
-        host="your_host",
-        port="your_port"
-    )
+    conn = psycopg2.connect(os.environ["DATABASE_URL"])
     cursor = conn.cursor(cursor_factory=RealDictCursor)
 
     try:
