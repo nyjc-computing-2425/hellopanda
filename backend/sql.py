@@ -42,7 +42,7 @@ RETRIEVE_ACCOUNT_BYEMAIL = """
 
 RETRIEVE_ACCOUNT_BYYEAR = """
         SELECT * FROM account
-        WHERE year = ?;
+        WHERE graduation_year = ?;
     """
 
 UPDATE_ACCOUNT_NAME = """
